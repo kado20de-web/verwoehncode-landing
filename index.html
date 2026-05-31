@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Der Verwöhn-Code — Das komplette Paket für den modernen Mann</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: #0d0d0d;
+      color: #f0f0f0;
+      line-height: 1.8;
+      font-size: 18px;
+    }
+
+    a { color: #e8a045; text-decoration: none; }
+
+    /* TOPBAR */
+    .topbar {
+      background: #1a1a1a;
+      text-align: center;
+      padding: 10px;
+      font-size: 14px;
+      color: #aaa;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #1a0a00 0%, #2d1200 50%, #1a0a00 100%);
+      padding: 80px 20px 60px;
+      text-align: center;
+      border-bottom: 3px solid #e8a045;
+    }
+
+    .hero .eyebrow {
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #e8a045;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 58px);
+      font-weight: 900;
+      line-height: 1.15;
+      color: #ffffff;
+      max-width: 900px;
+      margin: 0 auto 24px;
+    }
+
+    .hero h1 span { color: #e8a045; }
+
+    .hero .subheadline {
+      font-size: clamp(16px, 2.5vw, 22px);
+      color: #cccccc;
+      max-width: 720px;
+      margin: 0 auto 40px;
+      font-style: italic;
+    }
+
+    .hero-cta-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #e8a045, #c97d20);
+      color: #000;
+      font-weight: 900;
+      font-size: 20px;
+      padding: 20px 50px;
+      border-radius: 6px;
+      cursor: pointer;
+      border: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 8px 30px rgba(232,160,69,0.4);
+    }
+
+    .hero-cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(232,160,69,0.6);
+    }
+
+    .hero .below-btn {
+      font-size: 13px;
+      color: #888;
+      margin-top: 14px;
+    }
+
+    /* SECTION */
+    .section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 70px 20px;
+    }
+
+    .section-dark {
+      background: #111;
+    }
+
+    .section-darker {
+      background: #0a0a0a;
+    }
+
+    h2 {
+      font-size: clamp(24px, 4vw, 40px);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    h2 span { color: #e8a045; }
+
+    h3 {
+      font-size: 22px;
+      color: #e8a045;
+      margin: 30px 0 12px;
+    }
+
+    p {
+      margin-bottom: 20px;
+      color: #ccc;
+    }
+
+    p strong { color: #fff; }
+
+    .highlight-box {
+      background: #1e1200;
+      border-left: 4px solid #e8a045;
+      padding: 24px 28px;
+      border-radius: 4px;
+      margin: 30px 0;
+      font-size: 19px;
+      color: #f0e0c0;
+      font-style: italic;
+    }
+
+    /* WHO IT'S FOR */
+    .for-list {
+      list-style: none;
+      margin: 20px 0;
+    }
+
+    .for-list li {
+      padding: 12px 0 12px 40px;
+      position: relative;
+      color: #ddd;
+      border-bottom: 1px solid #222;
+      font-size: 17px;
+    }
+
+    .for-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #e8a045;
+      font-weight: 900;
+      font-size: 20px;
+    }
+
+    /* BOOKS / BONUSES */
+    .book-card {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 28px 30px;
+      margin: 20px 0;
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      position: relative;
+    }
+
+    .book-card .badge {
+      position: absolute;
+      top: -12px;
+      right: 20px;
+      background: #e8a045;
+      color: #000;
+      font-size: 12px;
+      font-weight: 900;
+      padding: 4px 14px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .book-icon {
+      font-size: 48px;
+      flex-shrink: 0;
+    }
+
+    .book-card h3 {
+      margin-top: 0;
+      font-size: 20px;
+    }
+
+    .book-card p {
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .book-price-strike {
+      color: #666;
+      text-decoration: line-through;
+      font-size: 15px;
+    }
+
+    /* PRICE SECTION */
+    .price-section {
+      background: linear-gradient(135deg, #1a0a00, #2d1200);
+      border-top: 3px solid #e8a045;
+      border-bottom: 3px solid #e8a045;
+      padding: 70px 20px;
+      text-align: center;
+    }
+
+    .price-section .inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .countdown-label {
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #e8a045;
+      margin-bottom: 12px;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin: 20px 0 40px;
+    }
+
+    .countdown-block {
+      background: #111;
+      border: 2px solid #e8a045;
+      border-radius: 8px;
+      padding: 16px 20px;
+      min-width: 80px;
+      text-align: center;
+    }
+
+    .countdown-block .num {
+      font-size: 42px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1;
+      display: block;
+    }
+
+    .countdown-block .unit {
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #888;
+      margin-top: 6px;
+    }
+
+    .price-table {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 30px 0;
+    }
+
+    .price-card {
+      background: #1a1a1a;
+      border: 2px solid #333;
+      border-radius: 12px;
+      padding: 30px 28px;
+      width: 280px;
+      text-align: center;
+      position: relative;
+    }
+
+    .price-card.featured {
+      border-color: #e8a045;
+      transform: scale(1.04);
+      box-shadow: 0 0 40px rgba(232,160,69,0.2);
+    }
+
+    .price-card .tag {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #e8a045;
+      color: #000;
+      font-size: 12px;
+      font-weight: 900;
+      padding: 4px 18px;
+      border-radius: 20px;
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+
+    .price-card .timer-condition {
+      font-size: 13px;
+      color: #e8a045;
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+
+    .price-card .old-price {
+      font-size: 15px;
+      color: #666;
+      text-decoration: line-through;
+    }
+
+    .price-card .new-price {
+      font-size: 54px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .price-card .new-price sup {
+      font-size: 24px;
+      vertical-align: super;
+    }
+
+    .price-card .saving {
+      font-size: 13px;
+      color: #4caf50;
+      margin-top: 6px;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #e8a045, #c97d20);
+      color: #000;
+      font-weight: 900;
+      font-size: 18px;
+      padding: 18px 40px;
+      border-radius: 6px;
+      cursor: pointer;
+      border: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 18px;
+      width: 100%;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 6px 24px rgba(232,160,69,0.3);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(232,160,69,0.5);
+    }
+
+    .guarantee-note {
+      font-size: 13px;
+      color: #666;
+      margin-top: 10px;
+    }
+
+    /* REVIEWS */
+    .review-card {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 10px;
+      padding: 28px;
+      margin: 20px 0;
+      position: relative;
+    }
+
+    .review-card::before {
+      content: '"';
+      font-size: 80px;
+      color: #e8a045;
+      opacity: 0.15;
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    .review-stars {
+      color: #e8a045;
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
+    .review-text {
+      font-size: 16px;
+      color: #ccc;
+      line-height: 1.75;
+      font-style: italic;
+      margin-bottom: 16px;
+    }
+
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .review-avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e8a045, #c97d20);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      color: #000;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .review-name {
+      font-weight: bold;
+      color: #fff;
+      font-size: 15px;
+    }
+
+    .review-meta {
+      font-size: 13px;
+      color: #666;
+    }
+
+    .verified {
+      font-size: 12px;
+      color: #4caf50;
+    }
+
+    /* FAQ */
+    .faq-item {
+      border-bottom: 1px solid #222;
+      padding: 22px 0;
+    }
+
+    .faq-q {
+      font-weight: bold;
+      color: #fff;
+      font-size: 17px;
+      margin-bottom: 10px;
+    }
+
+    .faq-a {
+      color: #aaa;
+      font-size: 16px;
+    }
+
+    /* GUARANTEE */
+    .guarantee-box {
+      background: #111;
+      border: 2px dashed #333;
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    .guarantee-box .icon {
+      font-size: 60px;
+      margin-bottom: 16px;
+    }
+
+    .guarantee-box h3 {
+      font-size: 26px;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #080808;
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 13px;
+      color: #444;
+    }
+
+    footer a { color: #666; }
+
+    /* DIVIDER */
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: #e8a045;
+      margin: 24px auto;
+    }
+
+    .text-center { text-align: center; }
+    .mt-40 { margin-top: 40px; }
+
+    /* TOTAL VALUE BOX */
+    .value-box {
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 28px;
+      margin: 30px 0;
+    }
+
+    .value-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #1e1e1e;
+      font-size: 16px;
+    }
+
+    .value-row:last-child { border-bottom: none; }
+
+    .value-row .item-name { color: #ccc; }
+    .value-row .item-price { color: #e8a045; font-weight: bold; }
+
+    .value-row.total {
+      font-size: 20px;
+      font-weight: 900;
+      margin-top: 10px;
+      padding-top: 16px;
+    }
+
+    .value-row.total .item-name { color: #fff; }
+    .value-row.total .item-price { color: #4caf50; }
+
+    @media (max-width: 600px) {
+      .book-card { flex-direction: column; }
+      .price-table { flex-direction: column; align-items: center; }
+      .price-card.featured { transform: none; }
+      .countdown { gap: 8px; }
+      .countdown-block { padding: 12px 14px; min-width: 66px; }
+      .countdown-block .num { font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  Limitiertes Angebot — Nur für kurze Zeit verfügbar
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="eyebrow">Das komplette Paket für den modernen Mann</p>
+  <h1>Endlich der Mann sein, <span>der sie nie vergisst</span> — im Bett, beim Date und im echten Leben.</h1>
+  <p class="subheadline">5 komplette Guides. Alles was du brauchst — von der ersten Nachricht bis zur unvergesslichen Nacht. Normalerweise 64,95&nbsp;€. Heute für einen Bruchteil davon.</p>
+  <a href="#angebot" class="hero-cta-btn">Jetzt das komplette Paket sichern →</a>
+  <p class="below-btn">Sofort-Download · Kein Abo · Keine versteckten Kosten</p>
+</section>
+
+<!-- OPENER — Frank Kern Style -->
+<div class="section-dark">
+  <div class="section">
+    <p>Hey —</p>
+    <p>Ich möchte dich kurz etwas fragen.</p>
+    <p>Kennst du dieses Gefühl, wenn du weißt, dass da mehr möglich wäre — im Dating, in der Beziehung, im Bett — aber du nicht genau weißt, <strong>wie du dahin kommst?</strong></p>
+    <p>Vielleicht scrollst du durch Tinder und fragst dich, warum manche Männer zehnmal mehr Matches bekommen als du.</p>
+    <p>Vielleicht bist du in einer Beziehung und merkst, dass die Magie irgendwie… verschwunden ist. Nicht weil du ein schlechter Mensch bist. Sondern weil dir einfach <strong>niemand jemals gezeigt hat, wie es wirklich geht.</strong></p>
+    <p>Und vielleicht hast du sogar schon diverse Artikel gelesen, YouTube-Videos geschaut, Ratschläge von Freunden gehört — und trotzdem das Gefühl, dass du im Kreis läufst.</p>
+
+    <div class="highlight-box">
+      Das ist nicht deine Schuld. Aber es wird deine Verantwortung, wenn du jetzt nichts tust.
+    </div>
+
+    <p>Ich habe dieses Paket zusammengestellt, weil ich glaube, dass jeder Mann das Zeug dazu hat — er braucht nur die richtigen Werkzeuge.</p>
+    <p>Was du hier bekommst, ist kein theoretisches Bla-Bla. Das sind <strong>konkrete Techniken, Schritt-für-Schritt-Anleitungen und erprobte Methoden</strong>, die du heute Abend noch anwenden kannst.</p>
+    <p>Und ich zeige dir gleich genau, was drin ist.</p>
+  </div>
+</div>
+
+<!-- FÜR WEN -->
+<div class="section-darker">
+  <div class="section">
+    <h2 class="text-center">Dieses Paket ist <span>genau für dich</span> — wenn...</h2>
+    <div class="divider"></div>
+    <ul class="for-list">
+      <li>Du auf Dating Apps unterwegs bist, aber das Gefühl hast, dass dein Profil einfach nicht zieht</li>
+      <li>Du eine Frau kennengelernt hast, die du wirklich beeindrucken willst — und nicht weißt wie</li>
+      <li>Du in einer Beziehung bist und ihr wieder das Gefühl geben willst, die einzige Frau auf der Welt zu sein</li>
+      <li>Du romantische Überraschungen planst, aber nie weißt was wirklich zündet</li>
+      <li>Du im Bett mehr geben willst, als du gerade gibst — und das auch selbst weißt</li>
+      <li>Du aufgehört hast, Ausreden zu suchen, und endlich handeln willst</li>
+    </ul>
+    <p style="margin-top:30px; color:#888; font-size:15px;">Dieses Paket ist <strong style="color:#fff;">nicht</strong> für Männer, die glauben, dass sie bereits alles wissen. Und es ist nicht für jemanden der einfach nur "irgendwie" besser werden will, ohne konkret etwas zu tun.</p>
+  </div>
+</div>
+
+<!-- DAS PAKET -->
+<div class="section-dark">
+  <div class="section">
+    <h2 class="text-center">Was du heute bekommst — <span>alles inklusive</span></h2>
+    <div class="divider"></div>
+
+    <!-- HAUPTBUCH -->
+    <div class="book-card">
+      <div class="badge">Hauptguide</div>
+      <div class="book-icon">📖</div>
+      <div>
+        <h3>Der Verwöhn-Code — Das komplette Handbuch</h3>
+        <p>Das Hauptwerk. Dein roter Faden durch alle Themen — von Alpha-Mindset über Flirt-Psychologie bis zur perfekten Nacht. Alles an einem Ort, aufeinander aufbauend, sofort anwendbar.</p>
+        <p class="book-price-strike">Normalpreis: 12,99&nbsp;€</p>
+      </div>
+    </div>
+
+    <!-- BONUS 1 -->
+    <div class="book-card">
+      <div class="badge">Bonus 1 — Gratis</div>
+      <div class="book-icon">💆</div>
+      <div>
+        <h3>Massage-Techniken für Partner</h3>
+        <p>Du lernst die 7 wirkungsvollsten Massage-Griffe, die sie sofort entspannen und gleichzeitig anziehen. Inklusive Schritt-für-Schritt-Illustrationen, Öl-Empfehlungen und der richtigen Atmosphäre. <strong style="color:#fff;">Die meisten Männer unterschätzen, wie viel eine gute Massage verändert.</strong></p>
+        <p class="book-price-strike">Normalpreis: 12,99&nbsp;€ — heute: Gratis</p>
+      </div>
+    </div>
+
+    <!-- BONUS 2 -->
+    <div class="book-card">
+      <div class="badge">Bonus 2 — Gratis</div>
+      <div class="book-icon">🎲</div>
+      <div>
+        <h3>Sex-Spiele für Paare</h3>
+        <p>42 erprobte Spiele und Ideen die die Spannung zwischen euch neu entfachen — von harmlos bis heiß. Sortiert nach Stimmung und Intensität, sodass du immer das Richtige zur Hand hast. <strong style="color:#fff;">Langeweile im Bett ist ab heute keine Option mehr.</strong></p>
+        <p class="book-price-strike">Normalpreis: 12,99&nbsp;€ — heute: Gratis</p>
+      </div>
+    </div>
+
+    <!-- BONUS 3 -->
+    <div class="book-card">
+      <div class="badge">Bonus 3 — Gratis</div>
+      <div class="book-icon">💝</div>
+      <div>
+        <h3>Romantische Überraschungen für Partner</h3>
+        <p>30 konkrete Ideen für romantische Überraschungen — für jedes Budget, jede Situation, jeden Anlass. Inklusive Checkliste, Einkaufliste und Schritt-für-Schritt-Ablauf für jede Idee. <strong style="color:#fff;">Sie wird fragen, wo du das her hast.</strong></p>
+        <p class="book-price-strike">Normalpreis: 12,99&nbsp;€ — heute: Gratis</p>
+      </div>
+    </div>
+
+    <!-- BONUS 4 -->
+    <div class="book-card">
+      <div class="badge">Bonus 4 — Gratis</div>
+      <div class="book-icon">🔥</div>
+      <div>
+        <h3>Alpha-Mann & Online-Dating Tipps</h3>
+        <p>Was "Alpha" wirklich bedeutet — kein toxischer Unsinn, sondern echte innere Stärke. Plus: Der komplette Tinder/Hinge/Bumble-Guide für mehr Matches, bessere Gespräche und echte Dates. <strong style="color:#fff;">Von der Bio bis zum ersten Kuss.</strong></p>
+        <p class="book-price-strike">Normalpreis: 12,99&nbsp;€ — heute: Gratis</p>
+      </div>
+    </div>
+
+    <!-- VALUE SUMMARY -->
+    <div class="value-box mt-40">
+      <div class="value-row"><span class="item-name">Der Verwöhn-Code (Hauptguide)</span><span class="item-price">12,99&nbsp;€</span></div>
+      <div class="value-row"><span class="item-name">Bonus 1: Massage-Techniken</span><span class="item-price">12,99&nbsp;€</span></div>
+      <div class="value-row"><span class="item-name">Bonus 2: Sex-Spiele für Paare</span><span class="item-price">12,99&nbsp;€</span></div>
+      <div class="value-row"><span class="item-name">Bonus 3: Romantische Überraschungen</span><span class="item-price">12,99&nbsp;€</span></div>
+      <div class="value-row"><span class="item-name">Bonus 4: Alpha-Mann & Online Dating</span><span class="item-price">12,99&nbsp;€</span></div>
+      <div class="value-row total"><span class="item-name">Gesamtwert</span><span class="item-price">64,95&nbsp;€</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- PRICE + COUNTDOWN -->
+<section class="price-section" id="angebot">
+  <div class="inner">
+    <h2 style="margin-bottom:10px;">Dein Angebot — <span>aber nur jetzt</span></h2>
+    <p style="color:#aaa; margin-bottom:30px;">Je schneller du handelst, desto mehr sparst du. Das ist keine Marketing-Masche — das ist meine Art, entschlossene Männer zu belohnen.</p>
+
+    <p class="countdown-label">⏱ Dein persönlicher Rabatt-Timer</p>
+
+    <div class="countdown" id="countdown">
+      <div class="countdown-block"><span class="num" id="cd-min">10</span><span class="unit">Min</span></div>
+      <div class="countdown-block"><span class="num" id="cd-sec">00</span><span class="unit">Sek</span></div>
+    </div>
+
+    <p id="price-message" style="color:#e8a045; font-size:15px; margin-bottom:30px;">
+      ⚡ Noch über 5 Minuten — du erhältst das komplette Paket für <strong>12,99&nbsp;€</strong>
+    </p>
+
+    <div class="price-table">
+      <div class="price-card">
+        <p class="timer-condition">Innerhalb von 5 Minuten</p>
+        <p class="old-price">64,95&nbsp;€</p>
+        <p class="new-price"><sup>€</sup>7<span style="font-size:28px;">,99</span></p>
+        <p class="saving">Du sparst 56,96&nbsp;€ — 87% Rabatt</p>
+        <a href="#" class="cta-btn" id="btn-5min">Ja, ich will es für 7,99&nbsp;€</a>
+        <p class="guarantee-note">Sofort-Download nach Kauf</p>
+      </div>
+      <div class="price-card featured">
+        <div class="tag">Beliebteste Wahl</div>
+        <p class="timer-condition">Innerhalb von 10 Minuten</p>
+        <p class="old-price">64,95&nbsp;€</p>
+        <p class="new-price"><sup>€</sup>12<span style="font-size:28px;">,99</span></p>
+        <p class="saving">Du sparst 51,96&nbsp;€ — 80% Rabatt</p>
+        <a href="#" class="cta-btn" id="btn-10min">Ich will das komplette Paket →</a>
+        <p class="guarantee-note">Sofort-Download nach Kauf</p>
+      </div>
+    </div>
+
+    <p style="margin-top:30px; color:#555; font-size:14px;">
+      🔒 Sichere SSL-Verbindung · Sofortiger digitaler Download · Einmalzahlung · Kein Abo
+    </p>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF — REVIEWS -->
+<div class="section-dark">
+  <div class="section">
+    <h2 class="text-center">Was andere Männer sagen</h2>
+    <div class="divider"></div>
+
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Ich war ehrlich gesagt skeptisch. Ich meine, ich bin 31 und hab schon ein paar Beziehungen hinter mir — was kann mir da noch ein E-Book beibringen? Aber meine beste Freundin hat mich überredet, und ich bin froh dass sie das getan hat. Das Massage-Kapitel allein hat bei meiner Freundin für Reaktionen gesorgt, die ich so noch nicht erlebt habe. Die Atmosphäre, die Techniken, die Reihenfolge — alles so erklärt, dass man es sofort umsetzen kann. Wir reden seitdem anders. Besser. Ich klingt vielleicht komisch aber das war ein echter Wendepunkt.</p>
+      <div class="review-author">
+        <div class="review-avatar">M</div>
+        <div>
+          <div class="review-name">Markus T.</div>
+          <div class="review-meta">31 Jahre · München <span class="verified">✓ Verifizierter Käufer</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Nach meiner letzten Trennung war ich eine Weile komplett raus aus dem Spiel. Tinder hat sich angefühlt wie eine andere Welt. Der Alpha-Mann und Online-Dating Guide hat mir gezeigt, dass mein Profil einfach grundlegend falsch war — nicht wegen der Fotos, sondern wegen der Energie die es ausgestrahlt hat. Hab alles umgestellt wie beschrieben, innerhalb von 3 Tagen mehr Matches als in den 2 Monaten davor. Einer davon ist jetzt meine Freundin. Kein Witz.</p>
+      <div class="review-author">
+        <div class="review-avatar">D</div>
+        <div>
+          <div class="review-name">Daniel K.</div>
+          <div class="review-meta">27 Jahre · Berlin <span class="verified">✓ Verifizierter Käufer</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Meine Frau und ich sind seit 6 Jahren zusammen. Man gewöhnt sich aneinander, das Feuer wird kleiner — das kennt jeder. Ich hab das Paket eher als Experiment gekauft, ohne große Erwartungen. Der Paar-Spiele Guide war am Anfang irgendwie so eine Sache wo ich dachte "das machen wir nie", aber wir haben einfach klein angefangen und es war… eigentlich unfassbar wie viel sich verändert hat. Wir reden mehr. Lachen mehr. Und den Rest behalte ich für mich. Kauf das einfach.</p>
+      <div class="review-author">
+        <div class="review-avatar">T</div>
+        <div>
+          <div class="review-name">Thomas R.</div>
+          <div class="review-meta">38 Jahre · Hamburg <span class="verified">✓ Verifizierter Käufer</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-stars">★★★★☆</div>
+      <p class="review-text">Ich gebe normalerweise keine Bewertungen ab, aber hier muss ich eine Ausnahme machen. Das mit den romantischen Überraschungen war für mich das Wichtigste. Meine Freundin sagt immer, ich bin nicht romantisch genug — und ich wollte das ändern aber hatte null Ideen. Der Guide hat mir buchstäblich eine fertige Liste gegeben, aufgeteilt nach Budget, nach Anlass, nach Aufwand. Ich hab die Überraschungs-Nacht aus Guide 3 gemacht und sie hat am nächsten Morgen ihrer Schwester davon erzählt. Das sagt alles. Einziger Abzug: Ich hätte mir mehr Fotos oder Illustrationen gewünscht. Aber der Inhalt ist top.</p>
+      <div class="review-author">
+        <div class="review-avatar">S</div>
+        <div>
+          <div class="review-name">Stefan W.</div>
+          <div class="review-meta">34 Jahre · Frankfurt <span class="verified">✓ Verifizierter Käufer</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GUARANTEE -->
+<div class="section-darker">
+  <div class="section">
+    <div class="guarantee-box">
+      <div class="icon">🛡️</div>
+      <h3>30-Tage Geld-zurück-Garantie</h3>
+      <p style="color:#aaa; max-width:500px; margin:0 auto;">Wenn du nach 30 Tagen nicht das Gefühl hast, dass dieses Paket sein Geld wert war — schreib mir eine kurze E-Mail und du bekommst jeden Cent zurück. Kein Fragebogen. Kein Stress. Versprochen.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="section-dark">
+  <div class="section">
+    <h2 class="text-center">Häufige Fragen</h2>
+    <div class="divider"></div>
+
+    <div class="faq-item">
+      <p class="faq-q">Wann bekomme ich die Bücher?</p>
+      <p class="faq-a">Sofort nach dem Kauf. Du bekommst eine E-Mail mit dem Download-Link — das dauert weniger als 60 Sekunden.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">In welchem Format kommen die Bücher?</p>
+      <p class="faq-a">Als PDF — lesbar auf jedem Smartphone, Tablet, Laptop und PC. Kein Kindle nötig, keine spezielle App.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">Gilt der Rabatt wirklich nur für kurze Zeit?</p>
+      <p class="faq-a">Ja. Der Timer ist echt. Das ist kein Marketing-Trick — nach Ablauf des Timers erhöht sich der Preis automatisch. Wie schnell du handelst, bestimmt was du zahlst.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">Ist das diskret? Sieht man auf der Kreditkartenabrechnung was ich gekauft habe?</p>
+      <p class="faq-a">Der Kauf erscheint auf deiner Abrechnung unter einem neutralen Firmennamen — kein Produkttitel, keine Kategorie. Vollständig diskret.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">Gibt es ein Abo oder versteckte Kosten?</p>
+      <p class="faq-a">Nein. Einmal zahlen, alles haben. Kein Abo, keine Verlängerung, keine versteckten Gebühren.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL CTA -->
+<section class="price-section">
+  <div class="inner">
+    <h2>Stell dir vor, wie es sich in 7 Tagen <span>anfühlt.</span></h2>
+    <p style="color:#aaa; margin-bottom:30px; font-size:17px;">Du weißt was du tust. Du weißt wie du sie berührst. Du weißt wie du sie überraschst. Und du merkst — an ihrer Reaktion — dass du einen Unterschied machst.</p>
+
+    <p class="countdown-label">⏱ Verbleibende Zeit für deinen Rabatt</p>
+
+    <div class="countdown" id="countdown2">
+      <div class="countdown-block"><span class="num" id="cd-min2">10</span><span class="unit">Min</span></div>
+      <div class="countdown-block"><span class="num" id="cd-sec2">00</span><span class="unit">Sek</span></div>
+    </div>
+
+    <a href="#" class="hero-cta-btn" style="margin-top:20px; display:inline-block;">
+      Ja — ich will das komplette Paket jetzt →
+    </a>
+    <p style="color:#555; font-size:13px; margin-top:16px;">
+      🔒 Sicherer Kauf · Sofort-Download · 30 Tage Geld-zurück-Garantie
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 · Alle Rechte vorbehalten</p>
+  <p style="margin-top:8px;">
+    <a href="#">Impressum</a> &nbsp;·&nbsp;
+    <a href="#">Datenschutz</a> &nbsp;·&nbsp;
+    <a href="#">Kontakt</a> &nbsp;·&nbsp;
+    <a href="#">Widerruf</a>
+  </p>
+  <p style="margin-top:16px; max-width:500px; margin-left:auto; margin-right:auto;">
+    Die auf dieser Seite dargestellten Ergebnisse sind individuelle Erfahrungen und keine Garantie für gleiche Resultate. Ergebnisse können variieren.
+  </p>
+</footer>
+
+<!-- COUNTDOWN SCRIPT -->
+<script>
+  // Startzeit merken (Session-basiert)
+  const storageKey = 'cdStartTime';
+  let startTime = sessionStorage.getItem(storageKey);
+  if (!startTime) {
+    startTime = Date.now();
+    sessionStorage.setItem(storageKey, startTime);
+  }
+  startTime = parseInt(startTime);
+
+  const totalSeconds = 10 * 60; // 10 Minuten
+
+  function updateCountdown() {
+    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+    const remaining = Math.max(0, totalSeconds - elapsed);
+
+    const mins = Math.floor(remaining / 60);
+    const secs = remaining % 60;
+
+    const minStr = String(mins).padStart(2, '0');
+    const secStr = String(secs).padStart(2, '0');
+
+    // Timer 1
+    document.getElementById('cd-min').textContent = minStr;
+    document.getElementById('cd-sec').textContent = secStr;
+    // Timer 2
+    document.getElementById('cd-min2').textContent = minStr;
+    document.getElementById('cd-sec2').textContent = secStr;
+
+    // Preis-Nachricht aktualisieren
+    const msgEl = document.getElementById('price-message');
+    if (remaining > 5 * 60) {
+      msgEl.innerHTML = '⚡ Noch über 5 Minuten — du erhältst das komplette Paket für <strong>12,99&nbsp;€</strong>';
+    } else if (remaining > 0) {
+      msgEl.innerHTML = '🔥 Unter 5 Minuten! Dein Preis: <strong style="color:#ff6b35; font-size:20px;">7,99&nbsp;€</strong> — handle jetzt!';
+    } else {
+      msgEl.innerHTML = '⏰ Zeit abgelaufen — Normalpreis gilt jetzt: 64,95&nbsp;€';
+      document.getElementById('btn-5min').textContent = 'Normalpreis: 64,95 €';
+      document.getElementById('btn-10min').textContent = 'Jetzt kaufen — 64,95 €';
+    }
+
+    if (remaining > 0) {
+      setTimeout(updateCountdown, 1000);
+    }
+  }
+
+  updateCountdown();
+</script>
+
+</body>
+</html>
