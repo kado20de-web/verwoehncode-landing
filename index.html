@@ -892,14 +892,14 @@
       condEl.textContent          = 'Standardpreis — Angebot endet bald';
 
     } else {
-      // Phase 3: Timer abgelaufen → Vollpreis
-      msgEl.innerHTML     = '⏰ Angebot abgelaufen — Vollpreis: 64,95&nbsp;€';
+      // Phase 3: Timer abgelaufen → bleibt bei 12,99€
+      msgEl.innerHTML     = '✓ Paket verfügbar für <strong>12,99&nbsp;€</strong>';
       oldPriceEl.style.display    = 'none';
-      newPriceEl.innerHTML        = '<sup>€</sup>64<span style="font-size:28px;">,95</span>';
-      savingEl.innerHTML          = 'Nächstes Mal früher entscheiden.';
-      btnEl.textContent           = 'Zum Vollpreis kaufen — 64,95 €';
-      tagEl.textContent           = 'Timer abgelaufen';
-      condEl.textContent          = 'Vollpreis aktiv';
+      newPriceEl.innerHTML        = '<sup>€</sup>12<span style="font-size:28px;">,99</span>';
+      savingEl.innerHTML          = 'Komplettes Paket · 5 Guides · Sofort-Download';
+      btnEl.textContent           = 'Jetzt für 12,99 € kaufen →';
+      tagEl.textContent           = '✓ Verfügbar';
+      condEl.textContent          = 'Standardpreis';
     }
 
     if (remaining > 0) setTimeout(updateCountdown, 1000);
