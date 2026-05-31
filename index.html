@@ -3,61 +3,62 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="design-tokens.css"/>
   <title>wirflirten.de — Das komplette Paket für den modernen Mann</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Georgia', serif;
-      background: #0d0d0d;
-      color: #f0f0f0;
-      line-height: 1.8;
-      font-size: 18px;
+      font-family: var(--font-serif);
+      background: var(--color-surface-page);
+      color: var(--color-text-secondary);
+      line-height: var(--leading-relaxed);
+      font-size: var(--text-md);
     }
 
-    a { color: #e8a045; text-decoration: none; }
+    a { color: var(--color-accent); text-decoration: none; }
 
     /* TOPBAR */
     .topbar {
-      background: #1a1a1a;
+      background: var(--color-surface-2);
       text-align: center;
       padding: 10px;
       font-size: 14px;
-      color: #aaa;
+      color: var(--color-text-tertiary);
       letter-spacing: 1px;
       text-transform: uppercase;
     }
 
     /* HERO */
     .hero {
-      background: linear-gradient(135deg, #1a0a00 0%, #2d1200 50%, #1a0a00 100%);
-      padding: 80px 20px 60px;
+      background: var(--gradient-hero);
+      padding: var(--space-section-lg) 20px var(--space-16);
       text-align: center;
-      border-bottom: 3px solid #e8a045;
+      border-bottom: 3px solid var(--color-accent);
     }
 
     .hero .eyebrow {
       font-size: 13px;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: #e8a045;
+      color: var(--color-accent);
       margin-bottom: 20px;
     }
 
     .hero h1 {
       font-size: clamp(28px, 5vw, 58px);
       font-weight: 900;
-      line-height: 1.15;
-      color: #ffffff;
+      line-height: var(--leading-tight);
+      color: var(--color-text-primary);
       max-width: 900px;
       margin: 0 auto 24px;
     }
 
-    .hero h1 span { color: #e8a045; }
+    .hero h1 span { color: var(--color-accent); }
 
     .hero .subheadline {
       font-size: clamp(16px, 2.5vw, 22px);
-      color: #cccccc;
+      color: var(--color-text-secondary);
       max-width: 720px;
       margin: 0 auto 40px;
       font-style: italic;
@@ -65,77 +66,77 @@
 
     .hero-cta-btn {
       display: inline-block;
-      background: linear-gradient(135deg, #e8a045, #c97d20);
-      color: #000;
+      background: var(--gradient-primary);
+      color: var(--color-text-inverse);
       font-weight: 900;
       font-size: 20px;
       padding: 20px 50px;
-      border-radius: 6px;
+      border-radius: var(--radius-md);
       cursor: pointer;
       border: none;
       text-transform: uppercase;
       letter-spacing: 1px;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 8px 30px rgba(232,160,69,0.4);
+      transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out);
+      box-shadow: var(--shadow-accent);
     }
 
     .hero-cta-btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(232,160,69,0.6);
+      box-shadow: var(--shadow-accent-hover);
     }
 
     .hero .below-btn {
       font-size: 13px;
-      color: #888;
+      color: var(--color-text-muted);
       margin-top: 14px;
     }
 
     /* SECTION */
     .section {
-      max-width: 800px;
+      max-width: var(--container-content);
       margin: 0 auto;
-      padding: 70px 20px;
+      padding: var(--space-section) 20px;
     }
 
     .section-dark {
-      background: #111;
+      background: var(--color-surface-1);
     }
 
     .section-darker {
-      background: #0a0a0a;
+      background: var(--color-surface-dark);
     }
 
     h2 {
       font-size: clamp(24px, 4vw, 40px);
       font-weight: 900;
-      color: #fff;
-      line-height: 1.2;
+      color: var(--color-text-primary);
+      line-height: var(--leading-tight);
       margin-bottom: 24px;
     }
 
-    h2 span { color: #e8a045; }
+    h2 span { color: var(--color-accent); }
 
     h3 {
       font-size: 22px;
-      color: #e8a045;
+      color: var(--color-accent);
       margin: 30px 0 12px;
     }
 
     p {
       margin-bottom: 20px;
-      color: #ccc;
+      color: var(--color-text-secondary);
     }
 
-    p strong { color: #fff; }
+    p strong { color: var(--color-text-primary); }
 
     .highlight-box {
-      background: #1e1200;
-      border-left: 4px solid #e8a045;
+      background: var(--color-accent-subtle);
+      border-left: 4px solid var(--color-accent);
       padding: 24px 28px;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       margin: 30px 0;
       font-size: 19px;
-      color: #f0e0c0;
+      color: var(--color-primary-200);
       font-style: italic;
     }
 
@@ -148,8 +149,8 @@
     .for-list li {
       padding: 12px 0 12px 40px;
       position: relative;
-      color: #ddd;
-      border-bottom: 1px solid #222;
+      color: var(--color-text-secondary);
+      border-bottom: 1px solid var(--color-surface-3);
       font-size: 17px;
     }
 
@@ -157,16 +158,16 @@
       content: '✓';
       position: absolute;
       left: 0;
-      color: #e8a045;
+      color: var(--color-accent);
       font-weight: 900;
       font-size: 20px;
     }
 
     /* BOOKS / BONUSES */
     .book-card {
-      background: #1a1a1a;
-      border: 1px solid #333;
-      border-radius: 10px;
+      background: var(--color-surface-2);
+      border: var(--border-thin);
+      border-radius: var(--radius-lg);
       padding: 28px 30px;
       margin: 20px 0;
       display: flex;
@@ -179,12 +180,12 @@
       position: absolute;
       top: -12px;
       right: 20px;
-      background: #e8a045;
-      color: #000;
+      background: var(--color-accent);
+      color: var(--color-text-inverse);
       font-size: 12px;
       font-weight: 900;
       padding: 4px 14px;
-      border-radius: 20px;
+      border-radius: var(--radius-pill);
       text-transform: uppercase;
       letter-spacing: 1px;
     }
@@ -205,17 +206,17 @@
     }
 
     .book-price-strike {
-      color: #666;
+      color: var(--color-text-disabled);
       text-decoration: line-through;
       font-size: 15px;
     }
 
     /* PRICE SECTION */
     .price-section {
-      background: linear-gradient(135deg, #1a0a00, #2d1200);
-      border-top: 3px solid #e8a045;
-      border-bottom: 3px solid #e8a045;
-      padding: 70px 20px;
+      background: var(--gradient-dark);
+      border-top: 3px solid var(--color-accent);
+      border-bottom: 3px solid var(--color-accent);
+      padding: var(--space-section) 20px;
       text-align: center;
     }
 
@@ -228,7 +229,7 @@
       font-size: 14px;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: #e8a045;
+      color: var(--color-accent);
       margin-bottom: 12px;
     }
 
@@ -240,9 +241,9 @@
     }
 
     .countdown-block {
-      background: #111;
-      border: 2px solid #e8a045;
-      border-radius: 8px;
+      background: var(--color-surface-1);
+      border: var(--border-accent);
+      border-radius: var(--radius-lg);
       padding: 16px 20px;
       min-width: 80px;
       text-align: center;
@@ -251,7 +252,7 @@
     .countdown-block .num {
       font-size: 42px;
       font-weight: 900;
-      color: #fff;
+      color: var(--color-text-primary);
       line-height: 1;
       display: block;
     }
@@ -260,7 +261,7 @@
       font-size: 11px;
       letter-spacing: 1px;
       text-transform: uppercase;
-      color: #888;
+      color: var(--color-text-muted);
       margin-top: 6px;
     }
 
@@ -273,9 +274,9 @@
     }
 
     .price-card {
-      background: #1a1a1a;
-      border: 2px solid #333;
-      border-radius: 12px;
+      background: var(--color-surface-2);
+      border: var(--border-medium);
+      border-radius: var(--radius-xl);
       padding: 30px 28px;
       width: 280px;
       text-align: center;
@@ -283,9 +284,9 @@
     }
 
     .price-card.featured {
-      border-color: #e8a045;
+      border-color: var(--color-accent);
       transform: scale(1.04);
-      box-shadow: 0 0 40px rgba(232,160,69,0.2);
+      box-shadow: var(--shadow-accent-card);
     }
 
     .price-card .tag {
@@ -293,33 +294,33 @@
       top: -14px;
       left: 50%;
       transform: translateX(-50%);
-      background: #e8a045;
-      color: #000;
+      background: var(--color-accent);
+      color: var(--color-text-inverse);
       font-size: 12px;
       font-weight: 900;
       padding: 4px 18px;
-      border-radius: 20px;
+      border-radius: var(--radius-pill);
       white-space: nowrap;
       text-transform: uppercase;
     }
 
     .price-card .timer-condition {
       font-size: 13px;
-      color: #e8a045;
+      color: var(--color-accent);
       margin-bottom: 12px;
       letter-spacing: 1px;
     }
 
     .price-card .old-price {
       font-size: 15px;
-      color: #666;
+      color: var(--color-text-disabled);
       text-decoration: line-through;
     }
 
     .price-card .new-price {
       font-size: 54px;
       font-weight: 900;
-      color: #fff;
+      color: var(--color-text-primary);
       line-height: 1;
     }
 
@@ -330,18 +331,18 @@
 
     .price-card .saving {
       font-size: 13px;
-      color: #4caf50;
+      color: var(--color-success);
       margin-top: 6px;
     }
 
     .cta-btn {
       display: inline-block;
-      background: linear-gradient(135deg, #e8a045, #c97d20);
-      color: #000;
+      background: var(--gradient-primary);
+      color: var(--color-text-inverse);
       font-weight: 900;
-      font-size: 18px;
+      font-size: var(--text-md);
       padding: 18px 40px;
-      border-radius: 6px;
+      border-radius: var(--radius-md);
       cursor: pointer;
       border: none;
       text-transform: uppercase;
@@ -349,26 +350,26 @@
       margin-top: 18px;
       width: 100%;
       text-align: center;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 6px 24px rgba(232,160,69,0.3);
+      transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out);
+      box-shadow: var(--shadow-accent);
     }
 
     .cta-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 32px rgba(232,160,69,0.5);
+      box-shadow: var(--shadow-accent-hover);
     }
 
     .guarantee-note {
       font-size: 13px;
-      color: #666;
+      color: var(--color-text-disabled);
       margin-top: 10px;
     }
 
     /* REVIEWS */
     .review-card {
-      background: #1a1a1a;
-      border: 1px solid #2a2a2a;
-      border-radius: 10px;
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-surface-3);
+      border-radius: var(--radius-lg);
       padding: 28px;
       margin: 20px 0;
       position: relative;
@@ -377,7 +378,7 @@
     .review-card::before {
       content: '"';
       font-size: 80px;
-      color: #e8a045;
+      color: var(--color-accent);
       opacity: 0.15;
       position: absolute;
       top: 10px;
@@ -387,15 +388,15 @@
     }
 
     .review-stars {
-      color: #e8a045;
-      font-size: 18px;
+      color: var(--color-accent);
+      font-size: var(--text-md);
       margin-bottom: 12px;
     }
 
     .review-text {
       font-size: 16px;
-      color: #ccc;
-      line-height: 1.75;
+      color: var(--color-text-secondary);
+      line-height: var(--leading-relaxed);
       font-style: italic;
       margin-bottom: 16px;
     }
@@ -410,55 +411,55 @@
       width: 46px;
       height: 46px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #e8a045, #c97d20);
+      background: var(--gradient-primary);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 900;
-      color: #000;
-      font-size: 18px;
+      color: var(--color-text-inverse);
+      font-size: var(--text-md);
       flex-shrink: 0;
     }
 
     .review-name {
       font-weight: bold;
-      color: #fff;
+      color: var(--color-text-primary);
       font-size: 15px;
     }
 
     .review-meta {
       font-size: 13px;
-      color: #666;
+      color: var(--color-text-disabled);
     }
 
     .verified {
       font-size: 12px;
-      color: #4caf50;
+      color: var(--color-success);
     }
 
     /* FAQ */
     .faq-item {
-      border-bottom: 1px solid #222;
+      border-bottom: 1px solid var(--color-surface-3);
       padding: 22px 0;
     }
 
     .faq-q {
       font-weight: bold;
-      color: #fff;
+      color: var(--color-text-primary);
       font-size: 17px;
       margin-bottom: 10px;
     }
 
     .faq-a {
-      color: #aaa;
+      color: var(--color-text-tertiary);
       font-size: 16px;
     }
 
     /* GUARANTEE */
     .guarantee-box {
-      background: #111;
-      border: 2px dashed #333;
-      border-radius: 12px;
+      background: var(--color-surface-1);
+      border: 2px dashed var(--color-surface-4);
+      border-radius: var(--radius-xl);
       padding: 40px;
       text-align: center;
       margin: 40px 0;
@@ -471,26 +472,26 @@
 
     .guarantee-box h3 {
       font-size: 26px;
-      color: #fff;
+      color: var(--color-text-primary);
       margin-bottom: 14px;
     }
 
     /* FOOTER */
     footer {
-      background: #080808;
+      background: var(--color-surface-dark);
       text-align: center;
       padding: 40px 20px;
       font-size: 13px;
-      color: #444;
+      color: var(--color-text-disabled);
     }
 
-    footer a { color: #666; }
+    footer a { color: var(--color-text-disabled); }
 
     /* DIVIDER */
     .divider {
       width: 60px;
       height: 3px;
-      background: #e8a045;
+      background: var(--color-accent);
       margin: 24px auto;
     }
 
@@ -499,9 +500,9 @@
 
     /* TOTAL VALUE BOX */
     .value-box {
-      background: #111;
-      border: 1px solid #333;
-      border-radius: 10px;
+      background: var(--color-surface-1);
+      border: var(--border-thin);
+      border-radius: var(--radius-lg);
       padding: 28px;
       margin: 30px 0;
     }
@@ -510,14 +511,14 @@
       display: flex;
       justify-content: space-between;
       padding: 10px 0;
-      border-bottom: 1px solid #1e1e1e;
+      border-bottom: 1px solid var(--color-surface-3);
       font-size: 16px;
     }
 
     .value-row:last-child { border-bottom: none; }
 
-    .value-row .item-name { color: #ccc; }
-    .value-row .item-price { color: #e8a045; font-weight: bold; }
+    .value-row .item-name { color: var(--color-text-secondary); }
+    .value-row .item-price { color: var(--color-accent); font-weight: bold; }
 
     .value-row.total {
       font-size: 20px;
@@ -526,8 +527,8 @@
       padding-top: 16px;
     }
 
-    .value-row.total .item-name { color: #fff; }
-    .value-row.total .item-price { color: #4caf50; }
+    .value-row.total .item-name { color: var(--color-text-primary); }
+    .value-row.total .item-price { color: var(--color-success); }
 
     @media (max-width: 600px) {
       .book-card { flex-direction: column; }
@@ -588,7 +589,7 @@
       <li>Du im Bett mehr geben willst, als du gerade gibst — und das auch selbst weißt</li>
       <li>Du aufgehört hast, Ausreden zu suchen, und endlich handeln willst</li>
     </ul>
-    <p style="margin-top:30px; color:#888; font-size:15px;">Dieses Paket ist <strong style="color:#fff;">nicht</strong> für Männer, die glauben, dass sie bereits alles wissen. Und es ist nicht für jemanden der einfach nur "irgendwie" besser werden will, ohne konkret etwas zu tun.</p>
+    <p style="margin-top:30px; color:var(--color-text-muted); font-size:15px;">Dieses Paket ist <strong style="color:var(--color-text-primary);">nicht</strong> für Männer, die glauben, dass sie bereits alles wissen. Und es ist nicht für jemanden der einfach nur "irgendwie" besser werden will, ohne konkret etwas zu tun.</p>
   </div>
 </div>
 
@@ -615,8 +616,8 @@
       <div class="book-icon">💆</div>
       <div>
         <h3>Massage-Techniken für Partner</h3>
-        <p>Du lernst die 7 wirkungsvollsten Massage-Griffe, die sie sofort entspannen und gleichzeitig anziehen. Inklusive Schritt-für-Schritt-Illustrationen, Öl-Empfehlungen und der richtigen Atmosphäre. <strong style="color:#fff;">Die meisten Männer unterschätzen, wie viel eine gute Massage verändert.</strong></p>
-        <p><span class="book-price-strike">Normalpreis: 12,99&nbsp;€</span> &nbsp;→&nbsp; <strong style="color:#4caf50; font-size:15px;">heute: Gratis ✓</strong></p>
+        <p>Du lernst die 7 wirkungsvollsten Massage-Griffe, die sie sofort entspannen und gleichzeitig anziehen. Inklusive Schritt-für-Schritt-Illustrationen, Öl-Empfehlungen und der richtigen Atmosphäre. <strong style="color:var(--color-text-primary);">Die meisten Männer unterschätzen, wie viel eine gute Massage verändert.</strong></p>
+        <p><span class="book-price-strike">Normalpreis: 12,99&nbsp;€</span> &nbsp;→&nbsp; <strong style="color:var(--color-success); font-size:15px;">heute: Gratis ✓</strong></p>
       </div>
     </div>
 
@@ -626,8 +627,8 @@
       <div class="book-icon">🎲</div>
       <div>
         <h3>Sex-Spiele für Paare</h3>
-        <p>42 erprobte Spiele und Ideen die die Spannung zwischen euch neu entfachen — von harmlos bis heiß. Sortiert nach Stimmung und Intensität, sodass du immer das Richtige zur Hand hast. <strong style="color:#fff;">Langeweile im Bett ist ab heute keine Option mehr.</strong></p>
-        <p><span class="book-price-strike">Normalpreis: 12,99&nbsp;€</span> &nbsp;→&nbsp; <strong style="color:#4caf50; font-size:15px;">heute: Gratis ✓</strong></p>
+        <p>42 erprobte Spiele und Ideen die die Spannung zwischen euch neu entfachen — von harmlos bis heiß. Sortiert nach Stimmung und Intensität, sodass du immer das Richtige zur Hand hast. <strong style="color:var(--color-text-primary);">Langeweile im Bett ist ab heute keine Option mehr.</strong></p>
+        <p><span class="book-price-strike">Normalpreis: 12,99&nbsp;€</span> &nbsp;→&nbsp; <strong style="color:var(--color-success); font-size:15px;">heute: Gratis ✓</strong></p>
       </div>
     </div>
 
@@ -637,8 +638,8 @@
       <div class="book-icon">💝</div>
       <div>
         <h3>Romantische Überraschungen für Partner</h3>
-        <p>30 konkrete Ideen für romantische Überraschungen — für jedes Budget, jede Situation, jeden Anlass. Inklusive Checkliste, Einkaufliste und Schritt-für-Schritt-Ablauf für jede Idee. <strong style="color:#fff;">Sie wird fragen, wo du das her hast.</strong></p>
-        <p><span class="book-price-strike">Normalpreis: 12,99&nbsp;€</span> &nbsp;→&nbsp; <strong style="color:#4caf50; font-size:15px;">heute: Gratis ✓</strong></p>
+        <p>30 konkrete Ideen für romantische Überraschungen — für jedes Budget, jede Situation, jeden Anlass. Inklusive Checkliste, Einkaufliste und Schritt-für-Schritt-Ablauf für jede Idee. <strong style="color:var(--color-text-primary);">Sie wird fragen, wo du das her hast.</strong></p>
+        <p><span class="book-price-strike">Normalpreis: 12,99&nbsp;€</span> &nbsp;→&nbsp; <strong style="color:var(--color-success); font-size:15px;">heute: Gratis ✓</strong></p>
       </div>
     </div>
 
@@ -648,8 +649,8 @@
       <div class="book-icon">🔥</div>
       <div>
         <h3>Alpha-Mann & Online-Dating Tipps</h3>
-        <p>Was "Alpha" wirklich bedeutet — kein toxischer Unsinn, sondern echte innere Stärke. Plus: Der komplette Tinder/Hinge/Bumble-Guide für mehr Matches, bessere Gespräche und echte Dates. <strong style="color:#fff;">Von der Bio bis zum ersten Kuss.</strong></p>
-        <p><span class="book-price-strike">Normalpreis: 12,99&nbsp;€</span> &nbsp;→&nbsp; <strong style="color:#4caf50; font-size:15px;">heute: Gratis ✓</strong></p>
+        <p>Was "Alpha" wirklich bedeutet — kein toxischer Unsinn, sondern echte innere Stärke. Plus: Der komplette Tinder/Hinge/Bumble-Guide für mehr Matches, bessere Gespräche und echte Dates. <strong style="color:var(--color-text-primary);">Von der Bio bis zum ersten Kuss.</strong></p>
+        <p><span class="book-price-strike">Normalpreis: 12,99&nbsp;€</span> &nbsp;→&nbsp; <strong style="color:var(--color-success); font-size:15px;">heute: Gratis ✓</strong></p>
       </div>
     </div>
 
@@ -669,7 +670,7 @@
 <section class="price-section" id="angebot">
   <div class="inner">
     <h2 style="margin-bottom:10px;">Dein Angebot — <span>aber nur jetzt</span></h2>
-    <p style="color:#aaa; margin-bottom:30px;">Je schneller du handelst, desto mehr sparst du. Das ist keine Marketing-Masche — das ist meine Art, entschlossene Männer zu belohnen.</p>
+    <p style="color:var(--color-text-tertiary); margin-bottom:30px;">Je schneller du handelst, desto mehr sparst du. Das ist keine Marketing-Masche — das ist meine Art, entschlossene Männer zu belohnen.</p>
 
     <p class="countdown-label">⏱ Dein persönlicher Rabatt-Timer</p>
 
@@ -678,7 +679,7 @@
       <div class="countdown-block"><span class="num" id="cd-sec">00</span><span class="unit">Sek</span></div>
     </div>
 
-    <p id="price-message" style="color:#e8a045; font-size:15px; margin-bottom:30px;">
+    <p id="price-message" style="color:var(--color-accent); font-size:15px; margin-bottom:30px;">
       ⚡ Noch über 5 Minuten — du erhältst das komplette Paket für <strong>12,99&nbsp;€</strong>
     </p>
 
@@ -694,7 +695,7 @@
       </div>
     </div>
 
-    <p style="margin-top:30px; color:#555; font-size:14px;">
+    <p style="margin-top:30px; color:var(--color-text-disabled); font-size:14px;">
       🔒 Sichere SSL-Verbindung · Sofortiger digitaler Download · Einmalzahlung · Kein Abo
     </p>
   </div>
@@ -762,7 +763,7 @@
     <div class="guarantee-box">
       <div class="icon">🛡️</div>
       <h3>30-Tage Geld-zurück-Garantie</h3>
-      <p style="color:#aaa; max-width:500px; margin:0 auto;">Wenn du nach 30 Tagen nicht das Gefühl hast, dass dieses Paket sein Geld wert war — schreib mir eine kurze E-Mail und du bekommst jeden Cent zurück. Kein Fragebogen. Kein Stress. Versprochen.</p>
+      <p style="color:var(--color-text-tertiary); max-width:500px; margin:0 auto;">Wenn du nach 30 Tagen nicht das Gefühl hast, dass dieses Paket sein Geld wert war — schreib mir eine kurze E-Mail und du bekommst jeden Cent zurück. Kein Fragebogen. Kein Stress. Versprochen.</p>
     </div>
   </div>
 </div>
@@ -804,7 +805,7 @@
 <section class="price-section">
   <div class="inner">
     <h2>Stell dir vor, wie es sich in 7 Tagen <span>anfühlt.</span></h2>
-    <p style="color:#aaa; margin-bottom:30px; font-size:17px;">Du weißt was du tust. Du weißt wie du sie berührst. Du weißt wie du sie überraschst. Und du merkst — an ihrer Reaktion — dass du einen Unterschied machst.</p>
+    <p style="color:var(--color-text-tertiary); margin-bottom:30px; font-size:17px;">Du weißt was du tust. Du weißt wie du sie berührst. Du weißt wie du sie überraschst. Und du merkst — an ihrer Reaktion — dass du einen Unterschied machst.</p>
 
     <p class="countdown-label">⏱ Verbleibende Zeit für deinen Rabatt</p>
 
@@ -816,7 +817,7 @@
     <a href="#" class="hero-cta-btn" style="margin-top:20px; display:inline-block;">
       Ja — ich will das komplette Paket jetzt →
     </a>
-    <p style="color:#555; font-size:13px; margin-top:16px;">
+    <p style="color:var(--color-text-disabled); font-size:13px; margin-top:16px;">
       🔒 Sicherer Kauf · Sofort-Download · 30 Tage Geld-zurück-Garantie
     </p>
   </div>
@@ -872,7 +873,7 @@
 
     if (remaining > fiveMinMark) {
       // Phase 1: Noch über 5 Min → 7,99€ Sonderpreis (12,99€ durchgestrichen)
-      msgEl.innerHTML     = '⚡ Noch über 5 Minuten — sichere dir das Paket für <strong style="color:#ff6b35;">7,99&nbsp;€</strong>';
+      msgEl.innerHTML     = '⚡ Noch über 5 Minuten — sichere dir das Paket für <strong style="color:var(--color-warning);">7,99&nbsp;€</strong>';
       oldPriceEl.style.display    = 'block';
       oldPriceEl.innerHTML        = '12,99&nbsp;€';
       newPriceEl.innerHTML        = '<sup>€</sup>7<span style="font-size:28px;">,99</span>';

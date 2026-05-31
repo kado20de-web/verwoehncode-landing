@@ -1,0 +1,234 @@
+/* ============================================
+   wirflirten.de — Design Token System
+   Brand Color: #e8a045 | Style: Dark Modern
+   ============================================ */
+
+:root {
+  /* ── META ── */
+  --meta-brand: wirflirten.de;
+  --meta-version: 1.0.0;
+
+  /* ── PRIMARY COLOR SCALE ── */
+  --color-primary-50:      #fdf3e3;
+  --color-primary-100:     #fae5c1;
+  --color-primary-200:     #f6d49a;
+  --color-primary-300:     #f2c272;
+  --color-primary-400:     #edb358;
+  --color-primary-500:     #e8a045;   /* Brand: wirflirten.de Gold */
+  --color-primary-600:     #c97d20;
+  --color-primary-700:     #a05e10;
+  --color-primary-800:     #6b3e08;
+  --color-primary-900:     #3a2004;
+
+  /* ── DARK SURFACE SCALE ── */
+  --color-surface-page:    #0d0d0d;   /* Seitenhintergrund */
+  --color-surface-dark:    #0a0a0a;   /* Noch dunkler */
+  --color-surface-1:       #111111;   /* Sections */
+  --color-surface-2:       #1a1a1a;   /* Cards */
+  --color-surface-3:       #222222;   /* Hover States */
+  --color-surface-4:       #2a2a2a;   /* Borders */
+  --color-surface-overlay: rgba(0, 0, 0, 0.6);
+
+  /* ── TEXT SCALE ── */
+  --color-text-primary:    #ffffff;
+  --color-text-secondary:  #cccccc;
+  --color-text-tertiary:   #aaaaaa;
+  --color-text-muted:      #888888;
+  --color-text-disabled:   #555555;
+  --color-text-inverse:    #000000;
+
+  /* ── SEMANTIC COLORS ── */
+  --color-success:         #4caf50;
+  --color-success-light:   #81c784;
+  --color-success-bg:      rgba(76, 175, 80, 0.1);
+  --color-warning:         #ff6b35;
+  --color-warning-light:   #ff9a6c;
+  --color-warning-bg:      rgba(255, 107, 53, 0.1);
+  --color-error:           #ef4444;
+  --color-error-bg:        rgba(239, 68, 68, 0.1);
+  --color-info:            #3b82f6;
+
+  /* ── ACCENT / HIGHLIGHT ── */
+  --color-accent:          #e8a045;   /* Alias für Primary */
+  --color-accent-hover:    #c97d20;
+  --color-accent-glow:     rgba(232, 160, 69, 0.4);
+  --color-accent-glow-strong: rgba(232, 160, 69, 0.6);
+  --color-accent-subtle:   rgba(232, 160, 69, 0.1);
+  --color-accent-border:   rgba(232, 160, 69, 0.3);
+
+  /* ── GRADIENT ── */
+  --gradient-primary:      linear-gradient(135deg, #e8a045, #c97d20);
+  --gradient-hero:         linear-gradient(135deg, #1a0a00 0%, #2d1200 50%, #1a0a00 100%);
+  --gradient-dark:         linear-gradient(135deg, #1a0a00, #2d1200);
+  --gradient-card:         linear-gradient(135deg, #1a1a1a, #222222);
+
+  /* ── TYPOGRAPHY ── */
+  --font-sans:             'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif:            'Georgia', 'Merriweather', serif;
+  --font-mono:             'Fira Code', Monaco, monospace;
+
+  --text-xs:               10px;
+  --text-sm:               13px;
+  --text-base:             16px;
+  --text-md:               18px;
+  --text-lg:               20px;
+  --text-xl:               25px;
+  --text-2xl:              31px;
+  --text-3xl:              39px;
+  --text-4xl:              49px;
+  --text-5xl:              61px;
+
+  /* Fluid Headlines */
+  --text-fluid-h1:         clamp(28px, 5vw, 58px);
+  --text-fluid-h2:         clamp(24px, 4vw, 40px);
+  --text-fluid-h3:         clamp(20px, 3vw, 28px);
+  --text-fluid-body:       clamp(16px, 2vw, 18px);
+  --text-fluid-sub:        clamp(16px, 2.5vw, 22px);
+
+  --weight-normal:         400;
+  --weight-medium:         500;
+  --weight-semibold:       600;
+  --weight-bold:           700;
+  --weight-extrabold:      800;
+  --weight-black:          900;
+
+  --leading-tight:         1.15;
+  --leading-snug:          1.25;
+  --leading-normal:        1.5;
+  --leading-relaxed:       1.8;
+
+  --tracking-tight:        -0.02em;
+  --tracking-normal:       0;
+  --tracking-wide:         0.025em;
+  --tracking-wider:        0.05em;
+  --tracking-widest:       0.1em;
+
+  /* ── SPACING (8pt Grid) ── */
+  --space-0:               0px;
+  --space-1:               4px;
+  --space-2:               8px;
+  --space-3:               12px;
+  --space-4:               16px;
+  --space-5:               20px;
+  --space-6:               24px;
+  --space-7:               28px;
+  --space-8:               32px;
+  --space-9:               36px;
+  --space-10:              40px;
+  --space-12:              48px;
+  --space-14:              56px;
+  --space-16:              64px;
+  --space-20:              80px;
+  --space-24:              96px;
+  --space-32:              128px;
+
+  /* Semantic Spacing */
+  --space-xs:              4px;
+  --space-sm:              8px;
+  --space-md:              16px;
+  --space-lg:              24px;
+  --space-xl:              40px;
+  --space-2xl:             72px;
+  --space-section:         70px;
+  --space-section-lg:      96px;
+
+  /* ── BORDER RADIUS ── */
+  --radius-none:           0;
+  --radius-sm:             4px;
+  --radius-md:             6px;
+  --radius-lg:             10px;
+  --radius-xl:             12px;
+  --radius-2xl:            16px;
+  --radius-pill:           9999px;
+
+  /* ── BORDER ── */
+  --border-thin:           1px solid var(--color-surface-3);
+  --border-medium:         2px solid var(--color-surface-4);
+  --border-accent:         2px solid var(--color-accent);
+  --border-accent-thin:    1px solid var(--color-accent-border);
+
+  /* ── SHADOWS ── */
+  --shadow-sm:             0 1px 2px rgba(0,0,0,0.3);
+  --shadow-md:             0 4px 12px rgba(0,0,0,0.4);
+  --shadow-lg:             0 10px 30px rgba(0,0,0,0.5);
+  --shadow-accent:         0 8px 30px var(--color-accent-glow);
+  --shadow-accent-hover:   0 12px 40px var(--color-accent-glow-strong);
+  --shadow-accent-card:    0 0 40px rgba(232,160,69,0.2);
+  --shadow-inner:          inset 0 2px 4px rgba(0,0,0,0.3);
+
+  /* ── ANIMATION ── */
+  --duration-fast:         150ms;
+  --duration-base:         200ms;
+  --duration-slow:         350ms;
+  --duration-slower:       500ms;
+  --ease-default:          ease;
+  --ease-out:              ease-out;
+  --ease-in-out:           ease-in-out;
+  --ease-spring:           cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* ── LAYOUT ── */
+  --container-sm:          640px;
+  --container-md:          768px;
+  --container-content:     800px;
+  --container-lg:          1024px;
+  --container-xl:          1280px;
+
+  /* ── Z-INDEX ── */
+  --z-base:                0;
+  --z-sticky:              100;
+  --z-overlay:             200;
+  --z-modal:               300;
+  --z-toast:               400;
+
+  /* ── COMPONENT TOKENS ── */
+
+  /* Buttons */
+  --btn-height-sm:         36px;
+  --btn-height-md:         46px;
+  --btn-height-lg:         56px;
+  --btn-padding-sm:        var(--space-3) var(--space-5);
+  --btn-padding-md:        var(--space-4) var(--space-8);
+  --btn-padding-lg:        var(--space-5) var(--space-10);
+  --btn-font-size:         18px;
+  --btn-font-size-lg:      20px;
+  --btn-font-weight:       var(--weight-black);
+  --btn-letter-spacing:    var(--tracking-wide);
+  --btn-radius:            var(--radius-md);
+  --btn-bg:                var(--gradient-primary);
+  --btn-color:             var(--color-text-inverse);
+  --btn-shadow:            var(--shadow-accent);
+  --btn-shadow-hover:      var(--shadow-accent-hover);
+  --btn-transform-hover:   translateY(-3px);
+  --btn-transform-active:  translateY(-1px);
+
+  /* Cards */
+  --card-bg:               var(--color-surface-2);
+  --card-border:           var(--border-thin);
+  --card-radius:           var(--radius-lg);
+  --card-padding:          var(--space-7) var(--space-8);
+
+  /* Price Card */
+  --price-card-bg:         var(--color-surface-2);
+  --price-card-border:     var(--border-medium);
+  --price-card-featured-border: var(--border-accent);
+  --price-card-featured-shadow: var(--shadow-accent-card);
+
+  /* Countdown */
+  --countdown-bg:          var(--color-surface-1);
+  --countdown-border:      var(--border-accent);
+  --countdown-radius:      var(--radius-lg);
+  --countdown-num-size:    42px;
+  --countdown-num-weight:  var(--weight-black);
+
+  /* Badge / Tag */
+  --badge-bg:              var(--color-accent);
+  --badge-color:           var(--color-text-inverse);
+  --badge-radius:          var(--radius-pill);
+  --badge-font-size:       12px;
+  --badge-font-weight:     var(--weight-black);
+
+  /* Divider */
+  --divider-width:         60px;
+  --divider-height:        3px;
+  --divider-color:         var(--color-accent);
+}
