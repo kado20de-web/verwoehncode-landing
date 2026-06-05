@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://wirflirten.de/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://wirflirten.de/impressum.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://wirflirten.de/datenschutz.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://wirflirten.de/agb.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://wirflirten.de/widerruf.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://www.wirflirten.de/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://www.wirflirten.de/impressum.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://www.wirflirten.de/datenschutz.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://www.wirflirten.de/agb.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://www.wirflirten.de/widerruf.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>

@@ -4,4 +4,4 @@ Disallow: /download
 Disallow: /api/
 Disallow: /admin
 
-Sitemap: https://wirflirten.de/sitemap.xml
+Sitemap: https://www.wirflirten.de/sitemap.xml
