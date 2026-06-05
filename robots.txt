@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /download
+Disallow: /api/
+Disallow: /admin
+
+Sitemap: https://wirflirten.de/sitemap.xml

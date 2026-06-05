@@ -4,10 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="design-tokens.css"/>
-  <title>wirflirten.de — Das komplette Paket für den modernen Mann</title>
+  <title>wirflirten — Liebe, die wächst. Von der ersten Nachricht bis zum gemeinsamen Leben.</title>
+  <meta name="description" content="wirflirten begleitet dich auf jeder Etappe der Liebe — beim klassischen Daten, beim Online-Dating und als Paar. Ehrliche Ratgeber & E-Books für echte Verbindung."/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="canonical" href="https://wirflirten.de/"/>
+
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="wirflirten"/>
+  <meta property="og:title" content="wirflirten — Liebe, die wächst."/>
+  <meta property="og:description" content="Ratgeber & E-Books für jede Etappe der Liebe — klassisches Daten, Online-Dating und Paare."/>
+  <meta property="og:url" content="https://wirflirten.de/"/>
+  <meta property="og:locale" content="de_DE"/>
+  <meta property="og:image" content="https://wirflirten.de/og-image.png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="wirflirten — Liebe, die wächst."/>
+  <meta name="twitter:description" content="Ratgeber & E-Books für jede Etappe der Liebe."/>
+  <meta name="twitter:image" content="https://wirflirten.de/og-image.png"/>
+
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
+    html { scroll-behavior: smooth; }
     body {
       font-family: var(--font-serif);
       background: var(--color-surface-page);
@@ -15,899 +31,387 @@
       line-height: var(--leading-relaxed);
       font-size: var(--text-md);
     }
-
     a { color: var(--color-accent); text-decoration: none; }
 
-    /* TOPBAR */
-    .topbar {
-      background: var(--color-surface-2);
-      text-align: center;
-      padding: 10px;
-      font-size: 14px;
-      color: var(--color-text-tertiary);
-      letter-spacing: 1px;
-      text-transform: uppercase;
+    .nav {
+      position: sticky; top: 0; z-index: var(--z-sticky);
+      background: rgba(13,13,13,0.85); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--color-surface-3);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 24px;
+    }
+    .nav .brand { font-weight: 900; font-size: 20px; color: var(--color-text-primary); letter-spacing: 0.5px; }
+    .nav .brand span { color: var(--color-accent); }
+    .nav-links { display: flex; gap: 26px; font-size: 15px; }
+    .nav-links a { color: var(--color-text-tertiary); transition: color var(--duration-base) var(--ease-out); }
+    .nav-links a:hover { color: var(--color-accent); }
+    .nav-toggle { display: none; background: none; border: none; color: var(--color-text-primary); font-size: 26px; line-height: 1; cursor: pointer; padding: 4px 8px; }
+    @media (max-width: 640px) {
+      .nav-toggle { display: block; }
+      .nav-links {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        flex-direction: column; gap: 0;
+        background: rgba(13,13,13,0.98); backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--color-surface-3); padding: 6px 0;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 14px 24px; }
     }
 
-    /* HERO */
-    .hero {
-      background: var(--gradient-hero);
-      padding: var(--space-section-lg) 20px var(--space-16);
-      text-align: center;
-      border-bottom: 3px solid var(--color-accent);
-    }
+    .topbar { background: var(--color-surface-2); text-align: center; padding: 9px; font-size: 13px; color: var(--color-text-tertiary); letter-spacing: 1px; text-transform: uppercase; }
 
-    .hero .eyebrow {
-      font-size: 13px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--color-accent);
-      margin-bottom: 20px;
-    }
-
-    .hero h1 {
-      font-size: clamp(28px, 5vw, 58px);
-      font-weight: 900;
-      line-height: var(--leading-tight);
-      color: var(--color-text-primary);
-      max-width: 900px;
-      margin: 0 auto 24px;
-    }
-
+    .hero { background: var(--gradient-hero); padding: var(--space-section-lg) 20px var(--space-20); text-align: center; border-bottom: 3px solid var(--color-accent); }
+    .hero .eyebrow { font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: var(--color-accent); margin-bottom: 22px; }
+    .hero h1 { font-size: clamp(30px, 5.5vw, 60px); font-weight: 900; line-height: var(--leading-tight); color: var(--color-text-primary); max-width: 920px; margin: 0 auto 24px; }
     .hero h1 span { color: var(--color-accent); }
+    .hero .subheadline { font-size: clamp(16px, 2.5vw, 22px); color: var(--color-text-secondary); max-width: 700px; margin: 0 auto 40px; font-style: italic; }
+    .hero-cta-btn { display: inline-block; background: var(--gradient-primary); color: var(--color-text-inverse); font-weight: 900; font-size: 19px; padding: 19px 46px; border-radius: var(--radius-md); cursor: pointer; border: none; text-transform: uppercase; letter-spacing: 1px; transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out); box-shadow: var(--shadow-accent); }
+    .hero-cta-btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-accent-hover); }
+    .hero .below-btn { font-size: 13px; color: var(--color-text-muted); margin-top: 14px; }
 
-    .hero .subheadline {
-      font-size: clamp(16px, 2.5vw, 22px);
-      color: var(--color-text-secondary);
-      max-width: 720px;
-      margin: 0 auto 40px;
-      font-style: italic;
-    }
+    .section { max-width: var(--container-content); margin: 0 auto; padding: var(--space-section) 20px; }
+    .section-wide { max-width: var(--container-lg); }
+    .section-dark { background: var(--color-surface-1); }
+    .section-darker { background: var(--color-surface-dark); }
 
-    .hero-cta-btn {
-      display: inline-block;
-      background: var(--gradient-primary);
-      color: var(--color-text-inverse);
-      font-weight: 900;
-      font-size: 20px;
-      padding: 20px 50px;
-      border-radius: var(--radius-md);
-      cursor: pointer;
-      border: none;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out);
-      box-shadow: var(--shadow-accent);
-    }
-
-    .hero-cta-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-accent-hover);
-    }
-
-    .hero .below-btn {
-      font-size: 13px;
-      color: var(--color-text-muted);
-      margin-top: 14px;
-    }
-
-    /* SECTION */
-    .section {
-      max-width: var(--container-content);
-      margin: 0 auto;
-      padding: var(--space-section) 20px;
-    }
-
-    .section-dark {
-      background: var(--color-surface-1);
-    }
-
-    .section-darker {
-      background: var(--color-surface-dark);
-    }
-
-    h2 {
-      font-size: clamp(24px, 4vw, 40px);
-      font-weight: 900;
-      color: var(--color-text-primary);
-      line-height: var(--leading-tight);
-      margin-bottom: 24px;
-    }
-
+    h2 { font-size: clamp(24px, 4vw, 40px); font-weight: 900; color: var(--color-text-primary); line-height: var(--leading-tight); margin-bottom: 20px; }
     h2 span { color: var(--color-accent); }
-
-    h3 {
-      font-size: 22px;
-      color: var(--color-accent);
-      margin: 30px 0 12px;
-    }
-
-    p {
-      margin-bottom: 20px;
-      color: var(--color-text-secondary);
-    }
-
+    p { margin-bottom: 20px; color: var(--color-text-secondary); }
     p strong { color: var(--color-text-primary); }
+    .lead { font-size: clamp(17px, 2.2vw, 21px); color: var(--color-text-tertiary); max-width: 680px; margin-left: auto; margin-right: auto; }
+    .divider { width: 60px; height: 3px; background: var(--color-accent); margin: 22px auto; }
+    .text-center { text-align: center; }
 
-    .highlight-box {
-      background: var(--color-accent-subtle);
-      border-left: 4px solid var(--color-accent);
-      padding: 24px 28px;
-      border-radius: var(--radius-sm);
-      margin: 30px 0;
-      font-size: 19px;
-      color: var(--color-primary-200);
-      font-style: italic;
-    }
+    .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 44px; }
+    .value-card { background: var(--color-surface-2); border: var(--border-thin); border-radius: var(--radius-lg); padding: 30px 26px; text-align: center; }
+    .value-card .icon { font-size: 38px; margin-bottom: 14px; }
+    .value-card h3 { font-size: 19px; color: var(--color-text-primary); margin-bottom: 10px; }
+    .value-card p { font-size: 15px; color: var(--color-text-tertiary); margin-bottom: 0; }
 
-    /* WHO IT'S FOR */
-    .for-list {
-      list-style: none;
-      margin: 20px 0;
-    }
+    .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 44px; }
+    .cat-card { background: var(--gradient-card); border: var(--border-thin); border-radius: var(--radius-xl); padding: 36px 30px; text-align: center; position: relative; overflow: hidden; transition: transform var(--duration-base) var(--ease-out), border-color var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out); display: flex; flex-direction: column; }
+    .cat-card.active { cursor: pointer; }
+    .cat-card.active:hover { transform: translateY(-6px); border-color: var(--color-accent); box-shadow: var(--shadow-accent-card); }
+    .cat-card.soon { opacity: 0.72; }
+    .cat-card .cat-icon { font-size: 50px; margin-bottom: 18px; }
+    .cat-card h3 { font-size: 23px; color: var(--color-text-primary); margin-bottom: 12px; }
+    .cat-card p { font-size: 15px; color: var(--color-text-tertiary); margin-bottom: 24px; flex-grow: 1; }
+    .cat-badge { position: absolute; top: 16px; right: 16px; font-size: 11px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; padding: 4px 12px; border-radius: var(--radius-pill); }
+    .cat-badge.available { background: var(--color-accent); color: var(--color-text-inverse); }
+    .cat-badge.coming { background: var(--color-surface-4); color: var(--color-text-muted); }
+    .cat-link { display: inline-block; font-weight: 900; font-size: 15px; text-transform: uppercase; letter-spacing: 1px; color: var(--color-accent); }
+    .cat-link.disabled { color: var(--color-text-disabled); }
 
-    .for-list li {
-      padding: 12px 0 12px 40px;
-      position: relative;
-      color: var(--color-text-secondary);
-      border-bottom: 1px solid var(--color-surface-3);
-      font-size: 17px;
-    }
+    .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 44px; }
+    .product-card { background: var(--color-surface-2); border: var(--border-thin); border-radius: var(--radius-lg); padding: 30px 26px; text-align: center; display: flex; flex-direction: column; transition: transform var(--duration-base) var(--ease-out), border-color var(--duration-base) var(--ease-out); }
+    .product-card:hover { transform: translateY(-4px); border-color: var(--color-accent-border); }
+    .product-cover { font-size: 56px; margin-bottom: 18px; }
+    .product-card h3 { font-size: 20px; color: var(--color-text-primary); margin-bottom: 12px; line-height: var(--leading-snug); }
+    .product-card p { font-size: 15px; color: var(--color-text-tertiary); margin-bottom: 22px; flex-grow: 1; }
+    .product-price { font-size: 30px; font-weight: 900; color: var(--color-text-primary); margin-bottom: 16px; }
+    .product-price sup { font-size: 16px; vertical-align: super; }
 
-    .for-list li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: var(--color-accent);
-      font-weight: 900;
-      font-size: 20px;
-    }
+    .cta-btn { display: inline-block; background: var(--gradient-primary); color: var(--color-text-inverse); font-weight: 900; font-size: 16px; padding: 15px 28px; border-radius: var(--radius-md); cursor: pointer; border: none; text-transform: uppercase; letter-spacing: 1px; width: 100%; text-align: center; transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out); box-shadow: var(--shadow-accent); }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-accent-hover); }
 
-    /* BOOKS / BONUSES */
-    .book-card {
-      background: var(--color-surface-2);
-      border: var(--border-thin);
-      border-radius: var(--radius-lg);
-      padding: 28px 30px;
-      margin: 20px 0;
-      display: flex;
-      gap: 24px;
-      align-items: flex-start;
-      position: relative;
-    }
+    .bundle-card { background: var(--gradient-dark); border: var(--border-accent); border-radius: var(--radius-2xl); padding: 44px 40px; margin-top: 40px; text-align: center; position: relative; box-shadow: var(--shadow-accent-card); }
+    .bundle-card .tag { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--color-accent); color: var(--color-text-inverse); font-size: 12px; font-weight: 900; padding: 5px 20px; border-radius: var(--radius-pill); text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
+    .bundle-card h3 { font-size: clamp(22px, 3vw, 30px); color: var(--color-text-primary); margin-bottom: 14px; }
+    .bundle-includes { list-style: none; max-width: 420px; margin: 20px auto 28px; text-align: left; }
+    .bundle-includes li { padding: 9px 0 9px 32px; position: relative; color: var(--color-text-secondary); font-size: 16px; border-bottom: 1px solid var(--color-surface-3); }
+    .bundle-includes li:last-child { border-bottom: none; }
+    .bundle-includes li::before { content: '✓'; position: absolute; left: 0; color: var(--color-accent); font-weight: 900; font-size: 18px; }
+    .bundle-price { display: flex; align-items: baseline; justify-content: center; gap: 14px; margin-bottom: 6px; }
+    .bundle-price .old { font-size: 22px; color: var(--color-text-disabled); text-decoration: line-through; }
+    .bundle-price .new { font-size: 52px; font-weight: 900; color: var(--color-text-primary); line-height: 1; }
+    .bundle-price .new sup { font-size: 24px; vertical-align: super; }
+    .bundle-saving { color: var(--color-success); font-size: 15px; margin-bottom: 24px; }
+    .bundle-card .cta-btn { max-width: 360px; margin: 0 auto; font-size: 18px; padding: 18px 36px; }
 
-    .book-card .badge {
-      position: absolute;
-      top: -12px;
-      right: 20px;
-      background: var(--color-accent);
-      color: var(--color-text-inverse);
-      font-size: 12px;
-      font-weight: 900;
-      padding: 4px 14px;
-      border-radius: var(--radius-pill);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
+    .highlight-box { background: var(--color-accent-subtle); border-left: 4px solid var(--color-accent); padding: 24px 28px; border-radius: var(--radius-sm); margin: 30px auto; max-width: 680px; font-size: 19px; color: var(--color-primary-200); font-style: italic; }
 
-    .book-icon {
-      font-size: 48px;
-      flex-shrink: 0;
-    }
+    .review-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; margin-top: 44px; }
+    .review-card { background: var(--color-surface-2); border: 1px solid var(--color-surface-3); border-radius: var(--radius-lg); padding: 28px; position: relative; }
+    .review-stars { color: var(--color-accent); font-size: var(--text-md); margin-bottom: 12px; }
+    .review-text { font-size: 16px; color: var(--color-text-secondary); line-height: var(--leading-relaxed); font-style: italic; margin-bottom: 16px; }
+    .review-author { display: flex; align-items: center; gap: 12px; }
+    .review-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--gradient-primary); display: flex; align-items: center; justify-content: center; font-weight: 900; color: var(--color-text-inverse); font-size: var(--text-md); flex-shrink: 0; }
+    .review-name { font-weight: bold; color: var(--color-text-primary); font-size: 15px; }
+    .review-meta { font-size: 13px; color: var(--color-text-disabled); }
+    .verified { font-size: 12px; color: var(--color-success); }
 
-    .book-card h3 {
-      margin-top: 0;
-      font-size: 20px;
-    }
+    .faq-item { border-bottom: 1px solid var(--color-surface-3); padding: 22px 0; }
+    .faq-q { font-weight: bold; color: var(--color-text-primary); font-size: 17px; margin-bottom: 10px; }
+    .faq-a { color: var(--color-text-tertiary); font-size: 16px; }
 
-    .book-card p {
-      font-size: 15px;
-      margin-bottom: 8px;
-    }
-
-    .book-price-strike {
-      color: var(--color-text-disabled);
-      text-decoration: line-through;
-      font-size: 15px;
-    }
-
-    /* PRICE SECTION */
-    .price-section {
-      background: var(--gradient-dark);
-      border-top: 3px solid var(--color-accent);
-      border-bottom: 3px solid var(--color-accent);
-      padding: var(--space-section) 20px;
-      text-align: center;
-    }
-
-    .price-section .inner {
-      max-width: 680px;
-      margin: 0 auto;
-    }
-
-    .countdown-label {
-      font-size: 14px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--color-accent);
-      margin-bottom: 12px;
-    }
-
-    .countdown {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      margin: 20px 0 40px;
-    }
-
-    .countdown-block {
-      background: var(--color-surface-1);
-      border: var(--border-accent);
-      border-radius: var(--radius-lg);
-      padding: 16px 20px;
-      min-width: 80px;
-      text-align: center;
-    }
-
-    .countdown-block .num {
-      font-size: 42px;
-      font-weight: 900;
-      color: var(--color-text-primary);
-      line-height: 1;
-      display: block;
-    }
-
-    .countdown-block .unit {
-      font-size: 11px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--color-text-muted);
-      margin-top: 6px;
-    }
-
-    .price-table {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin: 30px 0;
-    }
-
-    .price-card {
-      background: var(--color-surface-2);
-      border: var(--border-medium);
-      border-radius: var(--radius-xl);
-      padding: 30px 28px;
-      width: 280px;
-      text-align: center;
-      position: relative;
-    }
-
-    .price-card.featured {
-      border-color: var(--color-accent);
-      transform: scale(1.04);
-      box-shadow: var(--shadow-accent-card);
-    }
-
-    .price-card .tag {
-      position: absolute;
-      top: -14px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--color-accent);
-      color: var(--color-text-inverse);
-      font-size: 12px;
-      font-weight: 900;
-      padding: 4px 18px;
-      border-radius: var(--radius-pill);
-      white-space: nowrap;
-      text-transform: uppercase;
-    }
-
-    .price-card .timer-condition {
-      font-size: 13px;
-      color: var(--color-accent);
-      margin-bottom: 12px;
-      letter-spacing: 1px;
-    }
-
-    .price-card .old-price {
-      font-size: 15px;
-      color: var(--color-text-disabled);
-      text-decoration: line-through;
-    }
-
-    .price-card .new-price {
-      font-size: 54px;
-      font-weight: 900;
-      color: var(--color-text-primary);
-      line-height: 1;
-    }
-
-    .price-card .new-price sup {
-      font-size: 24px;
-      vertical-align: super;
-    }
-
-    .price-card .saving {
-      font-size: 13px;
-      color: var(--color-success);
-      margin-top: 6px;
-    }
-
-    .cta-btn {
-      display: inline-block;
-      background: var(--gradient-primary);
-      color: var(--color-text-inverse);
-      font-weight: 900;
-      font-size: var(--text-md);
-      padding: 18px 40px;
-      border-radius: var(--radius-md);
-      cursor: pointer;
-      border: none;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-top: 18px;
-      width: 100%;
-      text-align: center;
-      transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out);
-      box-shadow: var(--shadow-accent);
-    }
-
-    .cta-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-accent-hover);
-    }
-
-    .guarantee-note {
-      font-size: 13px;
-      color: var(--color-text-disabled);
-      margin-top: 10px;
-    }
-
-    /* REVIEWS */
-    .review-card {
-      background: var(--color-surface-2);
-      border: 1px solid var(--color-surface-3);
-      border-radius: var(--radius-lg);
-      padding: 28px;
-      margin: 20px 0;
-      position: relative;
-    }
-
-    .review-card::before {
-      content: '"';
-      font-size: 80px;
-      color: var(--color-accent);
-      opacity: 0.15;
-      position: absolute;
-      top: 10px;
-      left: 20px;
-      font-family: Georgia, serif;
-      line-height: 1;
-    }
-
-    .review-stars {
-      color: var(--color-accent);
-      font-size: var(--text-md);
-      margin-bottom: 12px;
-    }
-
-    .review-text {
-      font-size: 16px;
-      color: var(--color-text-secondary);
-      line-height: var(--leading-relaxed);
-      font-style: italic;
-      margin-bottom: 16px;
-    }
-
-    .review-author {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .review-avatar {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      background: var(--gradient-primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      color: var(--color-text-inverse);
-      font-size: var(--text-md);
-      flex-shrink: 0;
-    }
-
-    .review-name {
-      font-weight: bold;
-      color: var(--color-text-primary);
-      font-size: 15px;
-    }
-
-    .review-meta {
-      font-size: 13px;
-      color: var(--color-text-disabled);
-    }
-
-    .verified {
-      font-size: 12px;
-      color: var(--color-success);
-    }
-
-    /* FAQ */
-    .faq-item {
-      border-bottom: 1px solid var(--color-surface-3);
-      padding: 22px 0;
-    }
-
-    .faq-q {
-      font-weight: bold;
-      color: var(--color-text-primary);
-      font-size: 17px;
-      margin-bottom: 10px;
-    }
-
-    .faq-a {
-      color: var(--color-text-tertiary);
-      font-size: 16px;
-    }
-
-    /* GUARANTEE */
-    .guarantee-box {
-      background: var(--color-surface-1);
-      border: 2px dashed var(--color-surface-4);
-      border-radius: var(--radius-xl);
-      padding: 40px;
-      text-align: center;
-      margin: 40px 0;
-    }
-
-    .guarantee-box .icon {
-      font-size: 60px;
-      margin-bottom: 16px;
-    }
-
-    .guarantee-box h3 {
-      font-size: 26px;
-      color: var(--color-text-primary);
-      margin-bottom: 14px;
-    }
-
-    /* FOOTER */
-    footer {
-      background: var(--color-surface-dark);
-      text-align: center;
-      padding: 40px 20px;
-      font-size: 13px;
-      color: var(--color-text-disabled);
-    }
-
+    footer { background: var(--color-surface-dark); text-align: center; padding: 44px 20px; font-size: 13px; color: var(--color-text-disabled); }
+    footer .foot-brand { font-weight: 900; font-size: 18px; color: var(--color-text-secondary); margin-bottom: 8px; }
+    footer .foot-brand span { color: var(--color-accent); }
     footer a { color: var(--color-text-disabled); }
 
-    /* DIVIDER */
-    .divider {
-      width: 60px;
-      height: 3px;
-      background: var(--color-accent);
-      margin: 24px auto;
-    }
-
-    .text-center { text-align: center; }
-    .mt-40 { margin-top: 40px; }
-
-    /* TOTAL VALUE BOX */
-    .value-box {
-      background: var(--color-surface-1);
-      border: var(--border-thin);
-      border-radius: var(--radius-lg);
-      padding: 28px;
-      margin: 30px 0;
-    }
-
-    .value-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 0;
-      border-bottom: 1px solid var(--color-surface-3);
-      font-size: 16px;
-    }
-
-    .value-row:last-child { border-bottom: none; }
-
-    .value-row .item-name { color: var(--color-text-secondary); }
-    .value-row .item-price { color: var(--color-accent); font-weight: bold; }
-
-    .value-row.total {
-      font-size: 20px;
-      font-weight: 900;
-      margin-top: 10px;
-      padding-top: 16px;
-    }
-
-    .value-row.total .item-name { color: var(--color-text-primary); }
-    .value-row.total .item-price { color: var(--color-success); }
-
-    @media (max-width: 600px) {
-      .book-card { flex-direction: column; }
-      .price-table { flex-direction: column; align-items: center; }
-      .price-card.featured { transform: none; }
-      .countdown { gap: 8px; }
-      .countdown-block { padding: 12px 14px; min-width: 66px; }
-      .countdown-block .num { font-size: 32px; }
+    @media (max-width: 820px) {
+      .values-grid, .cat-grid, .product-grid { grid-template-columns: 1fr; }
+      .review-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-<!-- TOPBAR -->
-<div class="topbar">
-  Limitiertes Angebot — Nur für kurze Zeit verfügbar
-</div>
+<nav class="nav">
+  <div class="brand">wir<span>flirten</span></div>
+  <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen" aria-expanded="false">☰</button>
+  <div class="nav-links" id="navLinks">
+    <a href="#wofuer">Wofür wir stehen</a>
+    <a href="#kategorien">Kategorien</a>
+    <a href="#paare">Für Paare</a>
+  </div>
+</nav>
 
-<!-- HERO -->
+<div class="topbar">Ratgeber & E-Books für jede Etappe der Liebe</div>
+
 <section class="hero">
-  <p class="eyebrow">Das komplette Paket für den modernen Mann</p>
-  <h1>Endlich der Mann sein, <span>den sie nie vergisst</span> — im Bett, beim Date und im echten Leben.</h1>
-  <p class="subheadline">5 komplette Guides. Alles was du brauchst — von der ersten Nachricht bis zur unvergesslichen Nacht. Normalerweise 64,95&nbsp;€. Heute für einen Bruchteil davon.</p>
-  <a href="#angebot" class="hero-cta-btn">Jetzt das komplette Paket sichern →</a>
-  <p class="below-btn">Sofort-Download · Kein Abo · Keine versteckten Kosten</p>
+  <p class="eyebrow">wirflirten — gemeinsam statt einsam</p>
+  <h1>Liebe ist kein Zufall. <span>Sie ist erlernbar.</span></h1>
+  <p class="subheadline">Vom ersten Funken bis zur Beziehung, die hält. Wir begleiten dich auf jeder Etappe — beim klassischen Kennenlernen, beim Online-Dating und als Paar.</p>
+  <a href="#kategorien" class="hero-cta-btn">Deinen Bereich entdecken →</a>
+  <p class="below-btn">Sofort-Download · Kein Abo · Ehrliche, praxisnahe Ratgeber</p>
 </section>
 
-<!-- OPENER — Frank Kern Style -->
-<div class="section-dark">
-  <div class="section">
-    <p>Hey —</p>
-    <p>Ich möchte dich kurz etwas fragen.</p>
-    <p>Kennst du dieses Gefühl, wenn du weißt, dass da mehr möglich wäre — im Dating, in der Beziehung, im Bett — aber du nicht genau weißt, <strong>wie du dahin kommst?</strong></p>
-    <p>Vielleicht scrollst du durch Tinder und fragst dich, warum manche Männer zehnmal mehr Matches bekommen als du.</p>
-    <p>Vielleicht bist du in einer Beziehung und merkst, dass die Magie irgendwie… verschwunden ist. Nicht weil du ein schlechter Mensch bist. Sondern weil dir einfach <strong>niemand jemals gezeigt hat, wie es wirklich geht.</strong></p>
-    <p>Und vielleicht hast du sogar schon diverse Artikel gelesen, YouTube-Videos geschaut, Ratschläge von Freunden gehört — und trotzdem das Gefühl, dass du im Kreis läufst.</p>
-
-    <div class="highlight-box">
-      Das ist nicht deine Schuld. Aber es wird deine Verantwortung, wenn du jetzt nichts tust.
-    </div>
-
-    <p>Ich habe dieses Paket zusammengestellt, weil ich glaube, dass jeder Mann das Zeug dazu hat — er braucht nur die richtigen Werkzeuge.</p>
-    <p>Was du hier bekommst, ist kein theoretisches Bla-Bla. Das sind <strong>konkrete Techniken, Schritt-für-Schritt-Anleitungen und erprobte Methoden</strong>, die du heute Abend noch anwenden kannst.</p>
-    <p>Und ich zeige dir gleich genau, was drin ist.</p>
-  </div>
-</div>
-
-<!-- FÜR WEN -->
-<div class="section-darker">
-  <div class="section">
-    <h2 class="text-center">Dieses Paket ist <span>genau für dich</span> — wenn...</h2>
+<div class="section-dark" id="wofuer">
+  <div class="section section-wide">
+    <h2 class="text-center">Wofür <span>wirflirten</span> steht</h2>
     <div class="divider"></div>
-    <ul class="for-list">
-      <li>Du auf Dating Apps unterwegs bist, aber das Gefühl hast, dass dein Profil einfach nicht zieht</li>
-      <li>Du eine Frau kennengelernt hast, die du wirklich beeindrucken willst — und nicht weißt wie</li>
-      <li>Du in einer Beziehung bist und ihr wieder das Gefühl geben willst, die einzige Frau auf der Welt zu sein</li>
-      <li>Du romantische Überraschungen planst, aber nie weißt was wirklich zündet</li>
-      <li>Du im Bett mehr geben willst, als du gerade gibst — und das auch selbst weißt</li>
-      <li>Du aufgehört hast, Ausreden zu suchen, und endlich handeln willst</li>
-    </ul>
-    <p style="margin-top:30px; color:var(--color-text-muted); font-size:15px;">Dieses Paket ist <strong style="color:var(--color-text-primary);">nicht</strong> für Männer, die glauben, dass sie bereits alles wissen. Und es ist nicht für jemanden der einfach nur "irgendwie" besser werden will, ohne konkret etwas zu tun.</p>
+    <p class="lead text-center">Im Namen steckt unsere ganze Überzeugung: <strong>„wir"</strong> — weil Liebe nie ein Alleingang ist. Und <strong>„flirten"</strong> — weil die Leichtigkeit, der Funke, das Spielerische nie aufhören sollte. Nicht beim ersten Date und auch nicht nach zehn gemeinsamen Jahren.</p>
+    <div class="values-grid">
+      <div class="value-card"><div class="icon">💬</div><h3>Echte Verbindung</h3><p>Keine Tricks, keine Manipulation. Wir zeigen dir, wie aus einem Gespräch eine echte Nähe wird, die bleibt.</p></div>
+      <div class="value-card"><div class="icon">🌱</div><h3>Liebe, die wächst</h3><p>Beziehung ist kein Zustand, sondern eine Bewegung. Wir geben dir konkrete Wege, damit aus Verliebtheit Tiefe wird.</p></div>
+      <div class="value-card"><div class="icon">✨</div><h3>Leichtigkeit bewahren</h3><p>Der Funke vom Anfang darf bleiben. Wir helfen dir, das Spielerische wieder ins Leben — und ins Schlafzimmer — zu holen.</p></div>
+    </div>
   </div>
 </div>
 
-<!-- DAS PAKET -->
-<div class="section-dark">
-  <div class="section">
-    <h2 class="text-center">Was du heute bekommst — <span>alles inklusive</span></h2>
+<div class="section-darker" id="kategorien">
+  <div class="section section-wide">
+    <h2 class="text-center">Wo stehst du <span>gerade</span>?</h2>
     <div class="divider"></div>
-
-    <!-- HAUPTBUCH -->
-    <div class="book-card">
-      <div class="badge">Hauptguide</div>
-      <div class="book-icon">📖</div>
-      <div>
-        <h3>wirflirten.de — Das komplette Handbuch</h3>
-        <p>Das Hauptwerk. Dein roter Faden durch alle Themen — von Alpha-Mindset über Flirt-Psychologie bis zur perfekten Nacht. Alles an einem Ort, aufeinander aufbauend, sofort anwendbar.</p>
-        <p class="book-price-strike">Normalpreis: 12,99&nbsp;€</p>
+    <p class="lead text-center">Liebe hat viele Etappen. Wähle deinen Bereich — und finde genau die Ratgeber, die zu deinem Moment passen.</p>
+    <div class="cat-grid">
+      <div class="cat-card soon">
+        <span class="cat-badge coming">Bald verfügbar</span>
+        <div class="cat-icon">🌹</div>
+        <h3>Klassisches Daten</h3>
+        <p>Jemanden im echten Leben kennenlernen, das erste Date meistern und aus Schmetterlingen mehr machen. Ratgeber in Arbeit.</p>
+        <span class="cat-link disabled">Demnächst</span>
       </div>
-    </div>
-
-    <!-- BONUS 1 -->
-    <div class="book-card">
-      <div class="badge">Bonus 1 — Gratis</div>
-      <div class="book-icon">💆</div>
-      <div>
-        <h3>Massage-Techniken für Partner</h3>
-        <p>Du lernst die 7 wirkungsvollsten Massage-Griffe, die sie sofort entspannen und gleichzeitig anziehen. Inklusive Schritt-für-Schritt-Illustrationen, Öl-Empfehlungen und der richtigen Atmosphäre. <strong style="color:var(--color-text-primary);">Die meisten Männer unterschätzen, wie viel eine gute Massage verändert.</strong></p>
-        <p><span class="book-price-strike">Normalpreis: 12,99&nbsp;€</span> &nbsp;→&nbsp; <strong style="color:var(--color-success); font-size:15px;">heute: Gratis ✓</strong></p>
+      <div class="cat-card soon">
+        <span class="cat-badge coming">Bald verfügbar</span>
+        <div class="cat-icon">📱</div>
+        <h3>Online Dating</h3>
+        <p>Das Profil, das auffällt. Die Nachricht, die ankommt. Vom Match zum echten Treffen — ohne Spielchen. Ratgeber in Arbeit.</p>
+        <span class="cat-link disabled">Demnächst</span>
       </div>
-    </div>
-
-    <!-- BONUS 2 -->
-    <div class="book-card">
-      <div class="badge">Bonus 2 — Gratis</div>
-      <div class="book-icon">🎲</div>
-      <div>
-        <h3>Sex-Spiele für Paare</h3>
-        <p>42 erprobte Spiele und Ideen die die Spannung zwischen euch neu entfachen — von harmlos bis heiß. Sortiert nach Stimmung und Intensität, sodass du immer das Richtige zur Hand hast. <strong style="color:var(--color-text-primary);">Langeweile im Bett ist ab heute keine Option mehr.</strong></p>
-        <p><span class="book-price-strike">Normalpreis: 12,99&nbsp;€</span> &nbsp;→&nbsp; <strong style="color:var(--color-success); font-size:15px;">heute: Gratis ✓</strong></p>
-      </div>
-    </div>
-
-    <!-- BONUS 3 -->
-    <div class="book-card">
-      <div class="badge">Bonus 3 — Gratis</div>
-      <div class="book-icon">💝</div>
-      <div>
-        <h3>Romantische Überraschungen für Partner</h3>
-        <p>30 konkrete Ideen für romantische Überraschungen — für jedes Budget, jede Situation, jeden Anlass. Inklusive Checkliste, Einkaufliste und Schritt-für-Schritt-Ablauf für jede Idee. <strong style="color:var(--color-text-primary);">Sie wird fragen, wo du das her hast.</strong></p>
-        <p><span class="book-price-strike">Normalpreis: 12,99&nbsp;€</span> &nbsp;→&nbsp; <strong style="color:var(--color-success); font-size:15px;">heute: Gratis ✓</strong></p>
-      </div>
-    </div>
-
-    <!-- BONUS 4 -->
-    <div class="book-card">
-      <div class="badge">Bonus 4 — Gratis</div>
-      <div class="book-icon">🔥</div>
-      <div>
-        <h3>Werde der beste Mann, der du sein kannst</h3>
-        <p>Alpha-Mentalität bedeutet nicht laut sein — es bedeutet, <strong style="color:var(--color-text-primary);">der Mann zu sein, dem andere vertrauen, dem Frauen verfallen und den du selbst respektierst.</strong> Dieses Buch zeigt dir wie du Selbstbewusstsein aufbaust, Grenzen setzt und das Beste aus dir herausholst — im Alltag, im Dating und in der Beziehung.</p>
-        <p><span class="book-price-strike">Normalpreis: 12,99&nbsp;€</span> &nbsp;→&nbsp; <strong style="color:var(--color-success); font-size:15px;">heute: Gratis ✓</strong></p>
-      </div>
-    </div>
-
-    <!-- VALUE SUMMARY -->
-    <div class="value-box mt-40">
-      <div class="value-row"><span class="item-name">wirflirten.de — Hauptguide</span><span class="item-price">12,99&nbsp;€</span></div>
-      <div class="value-row"><span class="item-name">Bonus 1: Massage-Techniken</span><span class="item-price">12,99&nbsp;€</span></div>
-      <div class="value-row"><span class="item-name">Bonus 2: Sex-Spiele für Paare</span><span class="item-price">12,99&nbsp;€</span></div>
-      <div class="value-row"><span class="item-name">Bonus 3: Romantische Überraschungen</span><span class="item-price">12,99&nbsp;€</span></div>
-      <div class="value-row"><span class="item-name">Bonus 4: Alpha-Mentalität</span><span class="item-price">12,99&nbsp;€</span></div>
-      <div class="value-row total"><span class="item-name">Gesamtwert</span><span class="item-price">64,95&nbsp;€</span></div>
+      <a href="#paare" class="cat-card active" style="text-decoration:none;">
+        <span class="cat-badge available">Verfügbar</span>
+        <div class="cat-icon">💞</div>
+        <h3>Für Paare</h3>
+        <p>Ihr habt euch gefunden — jetzt geht's ums Bleiben. Romantik, Nähe und Leidenschaft, die nicht verblasst. 3 E-Books verfügbar.</p>
+        <span class="cat-link">Jetzt entdecken →</span>
+      </a>
     </div>
   </div>
 </div>
 
-<!-- PRICE + COUNTDOWN -->
-<section class="price-section" id="angebot">
-  <div class="inner">
-    <h2 style="margin-bottom:10px;">Dein Angebot — <span>aber nur jetzt</span></h2>
-    <p style="color:var(--color-text-tertiary); margin-bottom:30px;">Je schneller du handelst, desto mehr sparst du. Das ist keine Marketing-Masche — das ist meine Art, entschlossene Männer zu belohnen.</p>
+<div class="section-dark" id="paare">
+  <div class="section section-wide">
+    <p class="eyebrow text-center" style="color:var(--color-accent); letter-spacing:3px; text-transform:uppercase; font-size:13px; margin-bottom:14px;">Kategorie · Für Paare</p>
+    <h2 class="text-center">Damit die Liebe <span>lebendig bleibt</span></h2>
+    <div class="divider"></div>
+    <p class="lead text-center">Drei Ratgeber für Paare, die mehr wollen als Alltag. Sofort als PDF — lesbar auf jedem Gerät.</p>
 
-    <p class="countdown-label">⏱ Dein persönlicher Rabatt-Timer</p>
-
-    <div class="countdown" id="countdown">
-      <div class="countdown-block"><span class="num" id="cd-min">10</span><span class="unit">Min</span></div>
-      <div class="countdown-block"><span class="num" id="cd-sec">00</span><span class="unit">Sek</span></div>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-cover">💝</div>
+        <h3>101 romantische Ideen</h3>
+        <p>Schluss mit „Was machen wir heute?". 101 konkrete Ideen, um eurem Alltag wieder Romantik zu schenken — für jedes Budget, jede Stimmung, jeden Anlass.</p>
+        <div class="product-price"><sup>€</sup>12<span style="font-size:18px;">,99</span></div>
+        <a href="#" class="cta-btn" data-checkout="ideen">Jetzt kaufen →</a>
+      </div>
+      <div class="product-card">
+        <div class="product-cover">💆</div>
+        <h3>Massagetechniken für Paare</h3>
+        <p>Berührung ist die ehrlichste Sprache der Liebe. Die schönsten Massage-Techniken, um euch zu entspannen, näherzukommen und Spannung neu zu entfachen — Schritt für Schritt erklärt.</p>
+        <div class="product-price"><sup>€</sup>12<span style="font-size:18px;">,99</span></div>
+        <a href="#" class="cta-btn" data-checkout="massage">Jetzt kaufen →</a>
+      </div>
+      <div class="product-card">
+        <div class="product-cover">💍</div>
+        <h3>So werdet ihr ein Musterpaar</h3>
+        <p>Der Ratgeber für eine Beziehung, die andere bewundern. Wie ihr Konflikte löst, Nähe bewahrt und als Team durchs Leben geht — die Gewohnheiten glücklicher Paare.</p>
+        <div class="product-price"><sup>€</sup>12<span style="font-size:18px;">,99</span></div>
+        <a href="#" class="cta-btn" data-checkout="musterpaar">Jetzt kaufen →</a>
+      </div>
     </div>
 
-    <p id="price-message" style="color:var(--color-accent); font-size:15px; margin-bottom:30px;">
-      ⚡ Noch über 5 Minuten — du erhältst das komplette Paket für <strong>12,99&nbsp;€</strong>
+    <p class="text-center" style="margin-top:30px; color:var(--color-text-muted); font-size:14px;">
+      🔒 Sichere Zahlung über Stripe · Visa · Mastercard · American Express · Apple&nbsp;Pay · Google&nbsp;Pay · Sofort-Download als PDF
     </p>
 
-    <div class="price-table">
-      <div class="price-card featured" style="width:320px;">
-        <div class="tag" id="card-tag">⚡ Nur in den nächsten 5 Minuten</div>
-        <p class="timer-condition" id="card-condition">Handle jetzt — Sonderpreis aktiv</p>
-        <p class="old-price" id="card-old-price">12,99&nbsp;€</p>
-        <p class="new-price" id="card-new-price"><sup>€</sup>7<span style="font-size:28px;">,99</span></p>
-        <p class="saving" id="card-saving">Du sparst 5&nbsp;€ — handle jetzt!</p>
-        <a href="#" class="cta-btn" id="btn-main">Jetzt für 7,99&nbsp;€ kaufen →</a>
-        <p class="guarantee-note">Sofort-Download · 30 Tage Garantie</p>
+    <div class="bundle-card">
+      <div class="tag">★ Bestes Angebot — Paar-Paket</div>
+      <h3>Alle 3 Ratgeber in einem Paket</h3>
+      <p style="color:var(--color-text-tertiary); max-width:520px; margin:0 auto;">Das komplette Paar-Paket — alles, was ihr für eine Beziehung voller Romantik, Nähe und Leidenschaft braucht.</p>
+      <ul class="bundle-includes">
+        <li>101 romantische Ideen</li>
+        <li>Massagetechniken für Paare</li>
+        <li>So werdet ihr ein Musterpaar</li>
+      </ul>
+      <div class="bundle-price">
+        <span class="old">38,97&nbsp;€</span>
+        <span class="new"><sup>€</sup>24<span style="font-size:26px;">,99</span></span>
       </div>
+      <p class="bundle-saving">Du sparst 13,98&nbsp;€ gegenüber dem Einzelkauf</p>
+      <a href="#" class="cta-btn" data-checkout="bundle">Paar-Paket sichern →</a>
+      <p style="color:var(--color-text-disabled); font-size:13px; margin-top:16px; margin-bottom:0;">🔒 Sofort-Download · Einmalzahlung · Kein Abo</p>
     </div>
 
-    <p style="margin-top:30px; color:var(--color-text-disabled); font-size:14px;">
-      🔒 Sichere SSL-Verbindung · Sofortiger digitaler Download · Einmalzahlung · Kein Abo
-    </p>
-  </div>
-</section>
-
-<!-- SOCIAL PROOF — REVIEWS -->
-<div class="section-dark">
-  <div class="section">
-    <h2 class="text-center">Was andere Männer sagen</h2>
-    <div class="divider"></div>
-
-    <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">Ich war ehrlich gesagt skeptisch. Ich meine, ich bin 31 und hab schon ein paar Beziehungen hinter mir — was kann mir da noch ein E-Book beibringen? Aber meine beste Freundin hat mich überredet, und ich bin froh dass sie das getan hat. Das Massage-Kapitel allein hat bei meiner Freundin für Reaktionen gesorgt, die ich so noch nicht erlebt habe. Die Atmosphäre, die Techniken, die Reihenfolge — alles so erklärt, dass man es sofort umsetzen kann. Wir reden seitdem anders. Besser. Ich klingt vielleicht komisch aber das war ein echter Wendepunkt.</p>
-      <div class="review-author">
-        <div class="review-avatar">M</div>
-        <div>
-          <div class="review-name">Markus T.</div>
-          <div class="review-meta">31 Jahre · München <span class="verified">✓ Verifizierter Käufer</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">Nach meiner letzten Trennung war ich eine Weile komplett raus aus dem Spiel. Tinder hat sich angefühlt wie eine andere Welt. Das Buch über Alpha-Mentalität hat mir gezeigt, dass mein Profil einfach grundlegend falsch war — nicht wegen der Fotos, sondern wegen der Energie die es ausgestrahlt hat. Hab alles umgestellt wie beschrieben, innerhalb von 3 Tagen mehr Matches als in den 2 Monaten davor. Einer davon ist jetzt meine Freundin. Kein Witz.</p>
-      <div class="review-author">
-        <div class="review-avatar">D</div>
-        <div>
-          <div class="review-name">Daniel K.</div>
-          <div class="review-meta">27 Jahre · Berlin <span class="verified">✓ Verifizierter Käufer</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">Meine Frau und ich sind seit 6 Jahren zusammen. Man gewöhnt sich aneinander, das Feuer wird kleiner — das kennt jeder. Ich hab das Paket eher als Experiment gekauft, ohne große Erwartungen. Der Paar-Spiele Guide war am Anfang irgendwie so eine Sache wo ich dachte "das machen wir nie", aber wir haben einfach klein angefangen und es war… eigentlich unfassbar wie viel sich verändert hat. Wir reden mehr. Lachen mehr. Und den Rest behalte ich für mich. Kauf das einfach.</p>
-      <div class="review-author">
-        <div class="review-avatar">T</div>
-        <div>
-          <div class="review-name">Thomas R.</div>
-          <div class="review-meta">38 Jahre · Hamburg <span class="verified">✓ Verifizierter Käufer</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="review-card">
-      <div class="review-stars">★★★★☆</div>
-      <p class="review-text">Ich gebe normalerweise keine Bewertungen ab, aber hier muss ich eine Ausnahme machen. Das mit den romantischen Überraschungen war für mich das Wichtigste. Meine Freundin sagt immer, ich bin nicht romantisch genug — und ich wollte das ändern aber hatte null Ideen. Der Guide hat mir buchstäblich eine fertige Liste gegeben, aufgeteilt nach Budget, nach Anlass, nach Aufwand. Ich hab die Überraschungs-Nacht aus Guide 3 gemacht und sie hat am nächsten Morgen ihrer Schwester davon erzählt. Das sagt alles. Einziger Abzug: Ich hätte mir mehr Fotos oder Illustrationen gewünscht. Aber der Inhalt ist top.</p>
-      <div class="review-author">
-        <div class="review-avatar">S</div>
-        <div>
-          <div class="review-name">Stefan W.</div>
-          <div class="review-meta">34 Jahre · Frankfurt <span class="verified">✓ Verifizierter Käufer</span></div>
-        </div>
-      </div>
+    <div class="highlight-box text-center">
+      Die größte Überraschung ist nicht ein Geschenk — sondern das Gefühl, wieder gesehen zu werden.
     </div>
   </div>
 </div>
 
-<!-- GUARANTEE -->
 <div class="section-darker">
-  <div class="section">
-    <div class="guarantee-box">
-      <div class="icon">🛡️</div>
-      <h3>30-Tage Geld-zurück-Garantie</h3>
-      <p style="color:var(--color-text-tertiary); max-width:500px; margin:0 auto;">Wenn du nach 30 Tagen nicht das Gefühl hast, dass dieses Paket sein Geld wert war — schreib mir eine kurze E-Mail und du bekommst jeden Cent zurück. Kein Fragebogen. Kein Stress. Versprochen.</p>
+  <div class="section section-wide">
+    <h2 class="text-center">Was Paare erzählen</h2>
+    <div class="divider"></div>
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Wir sind seit acht Jahren zusammen und dachten, wir kennen uns in- und auswendig. Die „101 romantischen Ideen" haben uns gezeigt, wie viel wir aufgehört hatten zu tun. Wir machen jetzt jede Woche eine Idee — es fühlt sich an wie am Anfang.</p>
+        <div class="review-author"><div class="review-avatar">L</div><div><div class="review-name">Lena &amp; Tobias</div><div class="review-meta">Köln <span class="verified">✓ Verifizierter Kauf</span></div></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Das Massage-Buch war als kleines Geschenk gedacht und ist zu unserem festen Sonntagsritual geworden. So entspannt und nah waren wir uns lange nicht. Klar erklärt, ohne Kitsch.</p>
+        <div class="review-author"><div class="review-avatar">S</div><div><div class="review-name">Sandra K.</div><div class="review-meta">Stuttgart <span class="verified">✓ Verifizierter Kauf</span></div></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Wir hatten eine schwierige Phase. „So werdet ihr ein Musterpaar" hat uns nicht nur Tipps gegeben, sondern endlich die richtigen Worte füreinander. Das Kapitel über Streiten ohne zu verletzen sollte jedes Paar lesen.</p>
+        <div class="review-author"><div class="review-avatar">M</div><div><div class="review-name">Miriam &amp; Jonas</div><div class="review-meta">Hamburg <span class="verified">✓ Verifizierter Kauf</span></div></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Endlich mal Ratgeber, die nicht belehrend sind. Praktisch, ehrlich, sofort umsetzbar. Das Paar-Paket war jeden Cent wert — und ein super Geschenk zum Jahrestag.</p>
+        <div class="review-author"><div class="review-avatar">D</div><div><div class="review-name">David R.</div><div class="review-meta">Wien <span class="verified">✓ Verifizierter Kauf</span></div></div></div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- FAQ -->
-<div class="section-dark">
+<div class="section-dark" id="ueber-uns">
+  <div class="section">
+    <h2 class="text-center">Wer hinter <span>wirflirten</span> steht</h2>
+    <div class="divider"></div>
+    <p class="lead text-center">Wir sind ein kleines Team, das an eine einfache Idee glaubt: Gute Beziehungen sind kein Glücksfall, sondern das Ergebnis von Aufmerksamkeit, Mut und den richtigen Impulsen zur richtigen Zeit.</p>
+    <p class="text-center" style="max-width:680px; margin:0 auto;">Deshalb entwickeln wir Ratgeber, die nicht belehren, sondern begleiten — ehrlich, praxisnah und ohne erhobenen Zeigefinger. Kein leeres Versprechen, keine Tricks. Nur konkrete Ideen, die ihr heute Abend ausprobieren könnt. Damit aus Verliebtheit Tiefe wird — und die Leichtigkeit nie verloren geht.</p>
+  </div>
+</div>
+
+<div class="section-darker">
   <div class="section">
     <h2 class="text-center">Häufige Fragen</h2>
     <div class="divider"></div>
-
-    <div class="faq-item">
-      <p class="faq-q">Wann bekomme ich die Bücher?</p>
-      <p class="faq-a">Sofort nach dem Kauf. Du bekommst eine E-Mail mit dem Download-Link — das dauert weniger als 60 Sekunden.</p>
-    </div>
-
-    <div class="faq-item">
-      <p class="faq-q">In welchem Format kommen die Bücher?</p>
-      <p class="faq-a">Als PDF — lesbar auf jedem Smartphone, Tablet, Laptop und PC. Kein Kindle nötig, keine spezielle App.</p>
-    </div>
-
-    <div class="faq-item">
-      <p class="faq-q">Gilt der Rabatt wirklich nur für kurze Zeit?</p>
-      <p class="faq-a">Ja. Der Timer ist echt. Das ist kein Marketing-Trick — nach Ablauf des Timers erhöht sich der Preis automatisch. Wie schnell du handelst, bestimmt was du zahlst.</p>
-    </div>
-
-    <div class="faq-item">
-      <p class="faq-q">Ist das diskret? Sieht man auf der Kreditkartenabrechnung was ich gekauft habe?</p>
-      <p class="faq-a">Der Kauf erscheint auf deiner Abrechnung unter einem neutralen Firmennamen — kein Produkttitel, keine Kategorie. Vollständig diskret.</p>
-    </div>
-
-    <div class="faq-item">
-      <p class="faq-q">Gibt es ein Abo oder versteckte Kosten?</p>
-      <p class="faq-a">Nein. Einmal zahlen, alles haben. Kein Abo, keine Verlängerung, keine versteckten Gebühren.</p>
-    </div>
+    <div class="faq-item"><p class="faq-q">Wann bekomme ich die E-Books?</p><p class="faq-a">Sofort nach dem Kauf. Du erhältst eine E-Mail mit dem Download-Link — meist in unter 60 Sekunden.</p></div>
+    <div class="faq-item"><p class="faq-q">In welchem Format kommen die Bücher?</p><p class="faq-a">Als PDF — lesbar auf jedem Smartphone, Tablet, Laptop und PC. Keine spezielle App nötig.</p></div>
+    <div class="faq-item"><p class="faq-q">Sind die Ratgeber auch für Singles geeignet?</p><p class="faq-a">Die aktuellen Bücher richten sich an Paare. Für Singles entstehen gerade die Bereiche „Klassisches Daten" und „Online Dating" — sie erscheinen in Kürze.</p></div>
+    <div class="faq-item"><p class="faq-q">Gibt es ein Abo oder versteckte Kosten?</p><p class="faq-a">Nein. Einmal zahlen, für immer behalten. Kein Abo, keine Verlängerung, keine versteckten Gebühren.</p></div>
+    <div class="faq-item"><p class="faq-q">Ist der Kauf diskret?</p><p class="faq-a">Ja. Der Kauf erscheint auf deiner Abrechnung unter einem neutralen Firmennamen — kein Produkttitel, keine Kategorie.</p></div>
   </div>
 </div>
 
-<!-- FINAL CTA -->
-<section class="price-section">
-  <div class="inner">
-    <h2>Stell dir vor, wie es sich in 7 Tagen <span>anfühlt.</span></h2>
-    <p style="color:var(--color-text-tertiary); margin-bottom:30px; font-size:17px;">Du weißt was du tust. Du weißt wie du sie berührst. Du weißt wie du sie überraschst. Und du merkst — an ihrer Reaktion — dass du einen Unterschied machst.</p>
-
-    <p class="countdown-label">⏱ Verbleibende Zeit für deinen Rabatt</p>
-
-    <div class="countdown" id="countdown2">
-      <div class="countdown-block"><span class="num" id="cd-min2">10</span><span class="unit">Min</span></div>
-      <div class="countdown-block"><span class="num" id="cd-sec2">00</span><span class="unit">Sek</span></div>
-    </div>
-
-    <a href="#" class="hero-cta-btn" style="margin-top:20px; display:inline-block;">
-      Ja — ich will das komplette Paket jetzt →
-    </a>
-    <p style="color:var(--color-text-disabled); font-size:13px; margin-top:16px;">
-      🔒 Sicherer Kauf · Sofort-Download · 30 Tage Geld-zurück-Garantie
-    </p>
-  </div>
+<section class="hero" style="border-top:3px solid var(--color-accent);">
+  <p class="eyebrow">Fang heute an</p>
+  <h1 style="font-size:clamp(26px,4.5vw,46px);">Eure schönste Zeit liegt <span>noch vor euch.</span></h1>
+  <p class="subheadline">Ein kleiner Schritt heute kann verändern, wie ihr euch morgen anseht. Startet mit dem Paar-Paket.</p>
+  <a href="#paare" class="hero-cta-btn">Zum Paar-Paket →</a>
+  <p class="below-btn">🔒 Sichere Zahlung über Stripe · Sofort-Download nach dem Kauf</p>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <p>© 2026 wirflirten.de · Alle Rechte vorbehalten</p>
+  <p class="foot-brand">wir<span>flirten</span></p>
+  <p>© 2026 wirflirten · Alle Rechte vorbehalten</p>
   <p style="margin-top:8px;">
-    <a href="/ebooks.html">E-Books</a> &nbsp;·&nbsp;
     <a href="/impressum.html">Impressum</a> &nbsp;·&nbsp;
     <a href="/datenschutz.html">Datenschutz</a> &nbsp;·&nbsp;
-    <a href="mailto:wirflirten@vistaai.tech">Kontakt</a> &nbsp;·&nbsp;
-    <a href="mailto:wirflirten@vistaai.tech">Widerruf</a>
+    <a href="/agb.html">AGB</a> &nbsp;·&nbsp;
+    <a href="/widerruf.html">Widerruf</a> &nbsp;·&nbsp;
+    <a href="mailto:wirflirten@vistaai.tech">Kontakt</a>
   </p>
-  <p style="margin-top:16px; max-width:500px; margin-left:auto; margin-right:auto;">
-    Die auf dieser Seite dargestellten Ergebnisse sind individuelle Erfahrungen und keine Garantie für gleiche Resultate. Ergebnisse können variieren.
+  <p style="margin-top:16px; max-width:540px; margin-left:auto; margin-right:auto;">
+    Die auf dieser Seite dargestellten Erfahrungen sind individuell und keine Garantie für gleiche Resultate. Ergebnisse können variieren.
   </p>
 </footer>
 
-<!-- COUNTDOWN SCRIPT -->
 <script>
-  const storageKey = 'cdStartTime';
-  let startTime = sessionStorage.getItem(storageKey);
-  if (!startTime) {
-    startTime = Date.now();
-    sessionStorage.setItem(storageKey, startTime);
-  }
-  startTime = parseInt(startTime);
+  (function () {
+    let s = sessionStorage.getItem('wf_s');
+    if (!s) { s = Math.random().toString(36).slice(2) + Date.now().toString(36); sessionStorage.setItem('wf_s', s); }
+    window.wfTrack = function (t, product) {
+      try {
+        const body = JSON.stringify({ t, product, path: location.pathname, s });
+        if (navigator.sendBeacon) navigator.sendBeacon('/api/track', new Blob([body], { type: 'application/json' }));
+        else fetch('/api/track', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body, keepalive: true });
+      } catch (e) {}
+    };
+    wfTrack('pageview');
+  })();
+</script>
 
-  const totalSeconds = 10 * 60; // 10-Minuten Gesamtfenster
-  const fiveMinMark  =  5 * 60; // Preisumschaltung bei 5 Minuten
+<script>
+  (function () {
+    const toggle = document.getElementById('navToggle');
+    const links = document.getElementById('navLinks');
+    if (!toggle || !links) return;
+    toggle.addEventListener('click', () => {
+      const open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.textContent = open ? '✕' : '☰';
+    });
+    links.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => {
+      links.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.textContent = '☰';
+    }));
+  })();
+</script>
 
-  function updateCountdown() {
-    const elapsed   = Math.floor((Date.now() - startTime) / 1000);
-    const remaining = Math.max(0, totalSeconds - elapsed);
-
-    const mins   = Math.floor(remaining / 60);
-    const secs   = remaining % 60;
-    const minStr = String(mins).padStart(2, '0');
-    const secStr = String(secs).padStart(2, '0');
-
-    // Beide Timer aktualisieren
-    ['cd-min','cd-min2'].forEach(id => document.getElementById(id).textContent = minStr);
-    ['cd-sec','cd-sec2'].forEach(id => document.getElementById(id).textContent = secStr);
-
-    const msgEl       = document.getElementById('price-message');
-    const oldPriceEl  = document.getElementById('card-old-price');
-    const newPriceEl  = document.getElementById('card-new-price');
-    const savingEl    = document.getElementById('card-saving');
-    const btnEl       = document.getElementById('btn-main');
-    const tagEl       = document.getElementById('card-tag');
-    const condEl      = document.getElementById('card-condition');
-
-    if (remaining > fiveMinMark) {
-      // Phase 1: Noch über 5 Min → 7,99€ Sonderpreis (12,99€ durchgestrichen)
-      msgEl.innerHTML     = '⚡ Noch über 5 Minuten — sichere dir das Paket für <strong style="color:var(--color-warning);">7,99&nbsp;€</strong>';
-      oldPriceEl.style.display    = 'block';
-      oldPriceEl.innerHTML        = '12,99&nbsp;€';
-      newPriceEl.innerHTML        = '<sup>€</sup>7<span style="font-size:28px;">,99</span>';
-      savingEl.innerHTML          = 'Du sparst 5&nbsp;€ — nur in den nächsten Minuten!';
-      btnEl.textContent           = 'Jetzt für 7,99 € kaufen →';
-      tagEl.textContent           = '⚡ Nur in den nächsten 5 Minuten';
-      condEl.textContent          = 'Handle jetzt — Sonderpreis aktiv';
-
-    } else if (remaining > 0) {
-      // Phase 2: Unter 5 Min → 12,99€ (Normalpreis, kein Durchstreichen)
-      msgEl.innerHTML     = '🔥 Sonderpreis abgelaufen — Paket jetzt für <strong>12,99&nbsp;€</strong>';
-      oldPriceEl.style.display    = 'none';
-      newPriceEl.innerHTML        = '<sup>€</sup>12<span style="font-size:28px;">,99</span>';
-      savingEl.innerHTML          = 'Komplettes Paket · 5 Guides · Sofort-Download';
-      btnEl.textContent           = 'Jetzt für 12,99 € kaufen →';
-      tagEl.textContent           = '✓ Noch verfügbar';
-      condEl.textContent          = 'Standardpreis — Angebot endet bald';
-
-    } else {
-      // Phase 3: Timer abgelaufen → bleibt bei 12,99€
-      msgEl.innerHTML     = '✓ Paket verfügbar für <strong>12,99&nbsp;€</strong>';
-      oldPriceEl.style.display    = 'none';
-      newPriceEl.innerHTML        = '<sup>€</sup>12<span style="font-size:28px;">,99</span>';
-      savingEl.innerHTML          = 'Komplettes Paket · 5 Guides · Sofort-Download';
-      btnEl.textContent           = 'Jetzt für 12,99 € kaufen →';
-      tagEl.textContent           = '✓ Verfügbar';
-      condEl.textContent          = 'Standardpreis';
-    }
-
-    if (remaining > 0) setTimeout(updateCountdown, 1000);
-  }
-
-  updateCountdown();
+<script>
+  document.querySelectorAll('[data-checkout]').forEach((btn) => {
+    btn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      if (window.wfTrack) wfTrack('click', btn.dataset.checkout);
+      if (btn.dataset.loading) return;
+      const original = btn.textContent;
+      btn.dataset.loading = '1';
+      btn.style.opacity = '0.7';
+      btn.textContent = 'Einen Moment …';
+      try {
+        const res = await fetch('/api/checkout', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ product: btn.dataset.checkout }),
+        });
+        const data = await res.json();
+        if (data.url) { window.location = data.url; return; }
+        throw new Error(data.error || 'Unbekannter Fehler');
+      } catch (err) {
+        alert('Der Kauf konnte gerade nicht gestartet werden. Bitte versuche es erneut.\n\n(' + err.message + ')');
+        btn.textContent = original;
+        btn.style.opacity = '1';
+        delete btn.dataset.loading;
+      }
+    });
+  });
 </script>
 
 </body>

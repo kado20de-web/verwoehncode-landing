@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="stylesheet" href="design-tokens.css"/>
+  <title>Admin — wirflirten</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-sans); background: var(--color-surface-page); color: var(--color-text-secondary); }
+
+    .login-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+    .login-card { background: var(--color-surface-2); border: var(--border-thin); border-top: 3px solid var(--color-accent); border-radius: var(--radius-xl); padding: 40px 34px; width: 100%; max-width: 380px; text-align: center; }
+    .brand { font-weight: 900; font-size: 22px; color: var(--color-text-primary); margin-bottom: 24px; }
+    .brand span { color: var(--color-accent); }
+    input[type=password], input[type=text] { width: 100%; padding: 13px 14px; background: var(--color-surface-1); border: 1px solid var(--color-surface-4); border-radius: var(--radius-md); color: var(--color-text-primary); font-size: 15px; margin-bottom: 12px; }
+    input:focus { outline: none; border-color: var(--color-accent); }
+    .btn { display: inline-block; background: var(--gradient-primary); color: var(--color-text-inverse); font-weight: 800; font-size: 15px; padding: 13px 22px; border-radius: var(--radius-md); cursor: pointer; border: none; width: 100%; }
+    .btn:hover { transform: translateY(-1px); }
+    .btn.ghost { background: transparent; color: var(--color-text-tertiary); border: 1px solid var(--color-surface-4); width: auto; padding: 8px 16px; font-size: 13px; }
+    .err { color: var(--color-warning); font-size: 14px; margin-top: 10px; min-height: 18px; }
+
+    .dash { display: none; max-width: 1100px; margin: 0 auto; padding: 24px 20px 60px; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 8px; }
+    .topbar .left { display: flex; align-items: center; gap: 14px; }
+    .ranges { display: flex; gap: 6px; }
+    .range-btn { background: var(--color-surface-2); border: 1px solid var(--color-surface-4); color: var(--color-text-tertiary); padding: 7px 14px; border-radius: var(--radius-pill); font-size: 13px; cursor: pointer; }
+    .range-btn.active { background: var(--color-accent); color: var(--color-text-inverse); border-color: var(--color-accent); font-weight: 700; }
+
+    .tabs { display: flex; gap: 8px; margin: 18px 0 22px; border-bottom: 1px solid var(--color-surface-3); flex-wrap: wrap; }
+    .tab { background: none; border: none; color: var(--color-text-muted); padding: 12px 6px; margin-right: 14px; font-size: 15px; cursor: pointer; border-bottom: 2px solid transparent; }
+    .tab.active { color: var(--color-text-primary); border-bottom-color: var(--color-accent); font-weight: 700; }
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    .kpis { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin-bottom: 26px; }
+    .kpi { background: var(--color-surface-2); border: var(--border-thin); border-radius: var(--radius-lg); padding: 18px 16px; }
+    .kpi .label { font-size: 12px; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    .kpi .value { font-size: 26px; font-weight: 900; color: var(--color-text-primary); margin-top: 6px; }
+    .kpi .value.gold { color: var(--color-accent); }
+    @media (max-width: 900px) { .kpis { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 520px) { .kpis { grid-template-columns: repeat(2, 1fr); } }
+
+    .card { background: var(--color-surface-2); border: var(--border-thin); border-radius: var(--radius-lg); padding: 22px; margin-bottom: 22px; }
+    .card h3 { color: var(--color-text-primary); font-size: 16px; margin-bottom: 16px; }
+
+    .chart { display: flex; align-items: flex-end; gap: 6px; height: 160px; }
+    .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end; }
+    .bar { width: 100%; background: linear-gradient(180deg, var(--color-accent), var(--color-accent-hover)); border-radius: 4px 4px 0 0; min-height: 2px; transition: height .3s; }
+    .bar-col .lbl { font-size: 10px; color: var(--color-text-muted); }
+
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 11px 8px; font-size: 14px; border-bottom: 1px solid var(--color-surface-3); }
+    th { color: var(--color-text-muted); font-weight: 600; font-size: 12px; text-transform: uppercase; }
+    td { color: var(--color-text-secondary); }
+    td.num, th.num { text-align: right; }
+    .gold { color: var(--color-accent); }
+    .muted { color: var(--color-text-muted); font-size: 13px; }
+
+    .social-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    @media (max-width: 640px) { .social-grid { grid-template-columns: 1fr; } }
+    .social-card { background: var(--color-surface-1); border: 1px solid var(--color-surface-3); border-radius: var(--radius-lg); padding: 18px; }
+    .social-card .head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .social-card .ico { font-size: 22px; }
+    .social-card .name { font-weight: 700; color: var(--color-text-primary); }
+    .status { font-size: 12px; padding: 2px 10px; border-radius: var(--radius-pill); margin-left: auto; }
+    .status.off { background: var(--color-surface-4); color: var(--color-text-muted); }
+    .status.on { background: var(--color-success-bg); color: var(--color-success-light); }
+    .badge-soon { display: inline-block; background: var(--color-surface-4); color: var(--color-text-muted); font-size: 11px; padding: 2px 10px; border-radius: var(--radius-pill); text-transform: uppercase; letter-spacing: .5px; }
+    .note { background: var(--color-accent-subtle); border-left: 3px solid var(--color-accent); padding: 14px 16px; border-radius: var(--radius-sm); font-size: 14px; color: var(--color-primary-200); line-height: 1.6; margin-top: 4px; }
+
+    select { padding: 11px 12px; background: var(--color-surface-1); border: 1px solid var(--color-surface-4); border-radius: var(--radius-md); color: var(--color-text-primary); font-size: 14px; }
+    .gen-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .post-card { border-left: 3px solid var(--color-surface-4); }
+    .post-card.status-approved { border-left-color: var(--color-success); }
+    .post-card.status-rejected { border-left-color: var(--color-warning); opacity: 0.65; }
+    .post-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; }
+    .pbadge { background: var(--color-surface-1); border: 1px solid var(--color-surface-4); color: var(--color-text-tertiary); font-size: 12px; padding: 3px 10px; border-radius: var(--radius-pill); text-transform: capitalize; }
+    .pstatus { font-size: 12px; padding: 3px 10px; border-radius: var(--radius-pill); margin-left: auto; }
+    .pstatus.draft { background: var(--color-surface-4); color: var(--color-text-muted); }
+    .pstatus.approved { background: var(--color-success-bg); color: var(--color-success-light); }
+    .pstatus.rejected { background: var(--color-warning-bg); color: var(--color-warning-light); }
+    .post-card h4 { color: var(--color-text-primary); font-size: 16px; margin-bottom: 6px; }
+    .post-card .hook { color: var(--color-accent); font-style: italic; margin-bottom: 10px; }
+    .post-card .caption { white-space: pre-wrap; font-family: var(--font-sans); background: var(--color-surface-1); border-radius: var(--radius-sm); padding: 12px; font-size: 14px; color: var(--color-text-secondary); margin-bottom: 8px; }
+    .post-card .tags { color: var(--color-accent); font-size: 13px; margin-bottom: 8px; }
+    .post-card details summary { cursor: pointer; color: var(--color-text-tertiary); font-size: 14px; }
+    .script { margin-top: 10px; }
+    .script th, .script td { font-size: 12px; padding: 6px; vertical-align: top; }
+    .post-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 14px; }
+    .btn.mini { width: auto; padding: 8px 14px; font-size: 13px; }
+    .post-actions input[type=datetime-local] { width: auto; margin: 0; padding: 8px 10px; font-size: 13px; background: var(--color-surface-1); border: 1px solid var(--color-surface-4); border-radius: var(--radius-md); color: var(--color-text-primary); }
+    .media-preview { margin: 10px 0; }
+    .media-preview img, .media-preview video { max-width: 240px; border-radius: 8px; border: 1px solid var(--color-surface-4); display: block; }
+
+    .legend { display: flex; flex-wrap: wrap; gap: 14px; margin: 12px 0 18px; font-size: 12px; color: var(--color-text-tertiary); }
+    .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; }
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+    .cal-head { font-size: 11px; color: var(--color-text-muted); text-transform: uppercase; text-align: center; padding: 4px 0; }
+    .cal-cell { background: var(--color-surface-1); border: 1px solid var(--color-surface-3); border-radius: 6px; min-height: 84px; padding: 6px; }
+    .cal-cell.today { border-color: var(--color-accent); }
+    .cal-date { font-size: 12px; color: var(--color-text-muted); margin-bottom: 4px; }
+    .cal-post { font-size: 11px; color: #fff; border-radius: 4px; padding: 2px 5px; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    @media (max-width: 640px) { .cal-cell { min-height: 58px; } .cal-post { font-size: 10px; } }
+  </style>
+</head>
+<body>
+
+<div class="login-wrap" id="login">
+  <form class="login-card" id="loginForm">
+    <div class="brand">wir<span>flirten</span> · Admin</div>
+    <input type="password" id="pw" placeholder="Admin-Passwort" autocomplete="current-password"/>
+    <button class="btn" type="submit">Anmelden</button>
+    <div class="err" id="loginErr"></div>
+  </form>
+</div>
+
+<div class="dash" id="dash">
+  <div class="topbar">
+    <div class="left"><div class="brand" style="margin:0;">wir<span>flirten</span> · Admin</div></div>
+    <div style="display:flex; gap:12px; align-items:center;">
+      <div class="ranges">
+        <button class="range-btn" data-range="7d">7 Tage</button>
+        <button class="range-btn active" data-range="30d">30 Tage</button>
+        <button class="range-btn" data-range="all">Gesamt</button>
+      </div>
+      <button class="btn ghost" id="logout">Abmelden</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="overview">📊 Übersicht</button>
+    <button class="tab" data-tab="social">📱 Accounts</button>
+    <button class="tab" data-tab="studio">🎬 Content-Studio</button>
+    <button class="tab" data-tab="calendar">🗓️ Kalender</button>
+  </div>
+
+  <div class="panel active" id="panel-overview">
+    <div class="kpis" id="kpis"></div>
+    <div class="card"><h3>Besuche der letzten 14 Tage</h3><div class="chart" id="chart"></div></div>
+    <div class="card">
+      <h3>Produkte</h3>
+      <table><thead><tr><th>Produkt</th><th class="num">Kauf-Klicks</th><th class="num">Verkäufe</th><th class="num">Umsatz</th></tr></thead><tbody id="productRows"></tbody></table>
+    </div>
+    <div class="card">
+      <h3>Letzte Verkäufe</h3>
+      <table><thead><tr><th>Datum</th><th>Produkt</th><th>E-Mail</th><th class="num">Betrag</th></tr></thead><tbody id="recentRows"></tbody></table>
+      <p class="muted" id="salesNote" style="margin-top:12px;"></p>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-social">
+    <div class="card">
+      <h3>Social-Media-Accounts verbinden</h3>
+      <p class="muted" style="margin-bottom:18px;">Trage die Links/Handles eurer Profile ein. Sie werden gespeichert und sind die Basis für die spätere automatische Content-Veröffentlichung.</p>
+      <form id="socialForm">
+        <div class="social-grid">
+          <div class="social-card"><div class="head"><span class="ico">📸</span><span class="name">Instagram</span><span class="status off" id="st-instagram">nicht verbunden</span></div><input type="text" name="instagram" placeholder="https://instagram.com/wirflirten"/></div>
+          <div class="social-card"><div class="head"><span class="ico">👍</span><span class="name">Facebook</span><span class="status off" id="st-facebook">nicht verbunden</span></div><input type="text" name="facebook" placeholder="https://facebook.com/wirflirten"/></div>
+          <div class="social-card"><div class="head"><span class="ico">🎵</span><span class="name">TikTok</span><span class="status off" id="st-tiktok">nicht verbunden</span></div><input type="text" name="tiktok" placeholder="https://tiktok.com/@wirflirten"/></div>
+          <div class="social-card"><div class="head"><span class="ico">▶️</span><span class="name">YouTube</span><span class="status off" id="st-youtube">nicht verbunden</span></div><input type="text" name="youtube" placeholder="https://youtube.com/@wirflirten"/></div>
+        </div>
+        <button class="btn" type="submit" style="width:auto; margin-top:18px;">Speichern</button>
+        <span class="muted" id="socialSaved" style="margin-left:12px;"></span>
+      </form>
+    </div>
+    <div class="card">
+      <h3>KI-Content-Erstellung</h3>
+      <p class="muted">Die automatische Erstellung von Reels, Shorts, Bildern, Posts &amp; Captions findest du im Tab <strong>🎬 Content-Studio</strong>. Dort generiert die KI Vorschläge, die du freigibst oder verwirfst. Das tatsächliche Posten wird aktiv, sobald die Plattform-APIs (Instagram/TikTok/YouTube) freigegeben und verbunden sind.</p>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-studio">
+    <div class="card">
+      <h3>Neuen Content mit KI generieren</h3>
+      <p class="muted" style="margin-bottom:16px;">Wähle Thema, Plattform und Format. Die KI erstellt ein komplettes Paket: Hook, Caption, Hashtags, Bild-Prompt und Video-Skript.</p>
+      <div class="gen-row">
+        <select id="genTheme"><option value="paare">Thema: Für Paare</option><option value="daten">Thema: Klassisches Daten</option><option value="online">Thema: Online-Dating</option></select>
+        <select id="genPlatform"><option value="instagram">Instagram</option><option value="tiktok">TikTok</option><option value="youtube">YouTube</option></select>
+        <select id="genType"><option value="reel">Reel</option><option value="short">Short</option><option value="bild">Bild</option><option value="karussell">Karussell</option><option value="post">Post</option></select>
+        <button class="btn" id="genBtn" style="width:auto;">✨ Generieren</button>
+      </div>
+      <p class="muted" id="genStatus" style="margin-top:10px; min-height:18px;"></p>
+    </div>
+    <div id="contentList"></div>
+  </div>
+
+  <div class="panel" id="panel-calendar">
+    <div class="card">
+      <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between;">
+        <h3 style="margin:0;">Posting-Kalender</h3>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <button class="btn mini" id="autoplanBtn">🪄 Automatisch verplanen</button>
+          <span class="muted" id="autoplanStatus"></span>
+        </div>
+      </div>
+      <p class="muted" style="margin-top:8px;">Nächste 4 Wochen. „Automatisch verplanen" verteilt alle <strong>freigegebenen</strong>, noch nicht terminierten Posts auf empfohlene Zeiten je Plattform.</p>
+      <div class="legend">
+        <span><i style="background:#e1306c"></i> Instagram</span>
+        <span><i style="background:#69C9D0"></i> TikTok</span>
+        <span><i style="background:#ff0000"></i> YouTube</span>
+        <span><i style="background:#1877f2"></i> Facebook</span>
+      </div>
+      <div class="cal-grid" id="calHead"></div>
+      <div class="cal-grid" id="calGrid" style="margin-top:6px;"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+  let currentRange = '30d';
+
+  function eur(cents) { return (cents / 100).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €'; }
+
+  $('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    $('loginErr').textContent = '';
+    const r = await fetch('/api/admin/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: $('pw').value }) });
+    const d = await r.json().catch(() => ({}));
+    if (r.ok) showDash(); else $('loginErr').textContent = d.error || 'Anmeldung fehlgeschlagen.';
+  });
+
+  $('logout').addEventListener('click', async () => { await fetch('/api/admin/logout', { method: 'POST' }); location.reload(); });
+
+  function showDash() {
+    $('login').style.display = 'none';
+    $('dash').style.display = 'block';
+    loadStats(); loadSocials(); loadContent();
+  }
+
+  document.querySelectorAll('.range-btn').forEach((b) => b.addEventListener('click', () => {
+    document.querySelectorAll('.range-btn').forEach((x) => x.classList.remove('active'));
+    b.classList.add('active'); currentRange = b.dataset.range; loadStats();
+  }));
+  document.querySelectorAll('.tab').forEach((t) => t.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach((x) => x.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach((x) => x.classList.remove('active'));
+    t.classList.add('active'); $('panel-' + t.dataset.tab).classList.add('active');
+  }));
+
+  async function loadStats() {
+    const r = await fetch('/api/admin/stats?range=' + currentRange);
+    if (r.status === 401) { $('login').style.display = 'flex'; $('dash').style.display = 'none'; return; }
+    const d = await r.json();
+    const k = d.kpis;
+    $('kpis').innerHTML = [
+      ['Besuche', k.pageviews, ''], ['Sessions', k.sessions, ''], ['Kauf-Klicks', k.clicks, ''],
+      ['Verkäufe', k.orders, 'gold'], ['Umsatz', eur(k.revenue), 'gold'], ['Conversion', k.conversion.toFixed(1) + ' %', ''],
+    ].map(([l, v, c]) => `<div class="kpi"><div class="label">${l}</div><div class="value ${c}">${v}</div></div>`).join('');
+
+    const max = Math.max(1, ...d.timeseries.map((p) => p.views));
+    $('chart').innerHTML = d.timeseries.map((p) =>
+      `<div class="bar-col" title="${p.label}: ${p.views} Besuche, ${p.orders} Verkäufe"><div class="bar" style="height:${(p.views / max) * 100}%"></div><div class="lbl">${p.label.slice(0, 5)}</div></div>`).join('');
+
+    $('productRows').innerHTML = d.productRows.map((p) =>
+      `<tr><td>${p.name}</td><td class="num">${p.clicks}</td><td class="num">${p.sales}</td><td class="num gold">${eur(p.revenue)}</td></tr>`).join('');
+
+    $('recentRows').innerHTML = d.recent.length
+      ? d.recent.map((o) => `<tr><td>${new Date(o.ts).toLocaleDateString('de-DE')}</td><td>${o.name}</td><td class="muted">${o.email || '—'}</td><td class="num gold">${eur(o.amount)}</td></tr>`).join('')
+      : '<tr><td colspan="4" class="muted">Noch keine Verkäufe im Zeitraum.</td></tr>';
+
+    $('salesNote').textContent = d.salesConfigured ? 'Verkaufsdaten live aus Stripe.' : '⚠ Stripe ist nicht konfiguriert — Verkaufszahlen erscheinen, sobald STRIPE_SECRET_KEY gesetzt ist.';
+  }
+
+  async function loadSocials() {
+    const r = await fetch('/api/admin/socials');
+    if (!r.ok) return;
+    const d = await r.json();
+    ['instagram', 'facebook', 'tiktok', 'youtube'].forEach((k) => {
+      const input = document.querySelector(`#socialForm [name=${k}]`);
+      if (d[k]) { input.value = d[k]; const st = $('st-' + k); st.textContent = 'verbunden'; st.className = 'status on'; }
+    });
+  }
+
+  $('socialForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const body = {}; new FormData(e.target).forEach((v, k) => (body[k] = v));
+    const r = await fetch('/api/admin/socials', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    if (r.ok) { $('socialSaved').textContent = '✓ Gespeichert'; loadSocials(); setTimeout(() => ($('socialSaved').textContent = ''), 2500); }
+  });
+
+  const platIcon = { instagram: '📸', tiktok: '🎵', youtube: '▶️', facebook: '👍' };
+  const themeLabel = { daten: 'Klassisches Daten', online: 'Online-Dating', paare: 'Für Paare' };
+  const statusLabel = { draft: 'Entwurf', approved: 'Freigegeben', rejected: 'Verworfen' };
+  const platColor = { instagram: '#e1306c', tiktok: '#69C9D0', youtube: '#ff0000', facebook: '#1877f2' };
+  let allContent = [];
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m])); }
+  function toLocalInput(ts) { const d = new Date(ts - new Date().getTimezoneOffset() * 60000); return d.toISOString().slice(0, 16); }
+
+  $('genBtn').addEventListener('click', async () => {
+    $('genStatus').textContent = 'KI erstellt Content … (kann ein paar Sekunden dauern)';
+    $('genBtn').disabled = true;
+    try {
+      const r = await fetch('/api/admin/content/generate', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ theme: $('genTheme').value, platform: $('genPlatform').value, type: $('genType').value }) });
+      const d = await r.json();
+      if (!r.ok) throw new Error(d.error || 'Fehler');
+      $('genStatus').textContent = '✓ Entwurf erstellt.'; loadContent();
+    } catch (e) { $('genStatus').textContent = '⚠ ' + e.message; }
+    finally { $('genBtn').disabled = false; setTimeout(() => { if ($('genStatus').textContent.startsWith('✓')) $('genStatus').textContent = ''; }, 3000); }
+  });
+
+  async function loadContent() {
+    const r = await fetch('/api/admin/content');
+    if (!r.ok) return;
+    allContent = await r.json();
+    $('contentList').innerHTML = allContent.length ? allContent.map(renderPost).join('') : '<p class="muted">Noch keine Inhalte. Generiere oben deinen ersten Post.</p>';
+    renderCalendar();
+  }
+
+  function renderPost(it) {
+    const c = it.content || {};
+    const tags = (c.hashtags || []).join(' ');
+    const script = (c.videoScript || []).map((s) => `<tr><td>${esc(s.scene || '')}</td><td>${esc(s.onScreen || '')}</td><td>${esc(s.voiceover || '')}</td><td>${esc(s.visual || '')}</td></tr>`).join('');
+    const sched = it.scheduledAt ? new Date(it.scheduledAt).toLocaleString('de-DE') : '';
+    let mediaBlock = '';
+    let mediaBtn = `<button class="btn mini ghost" onclick="genMedia('${it.id}')">🎨 Medien generieren</button>`;
+    if (it.media) {
+      if (it.media.status === 'processing') { mediaBlock = '<p class="muted media-preview">🎨 Medien werden generiert … (kann einige Minuten dauern)</p>'; mediaBtn = ''; }
+      else if (it.media.status === 'error') { mediaBlock = `<p class="muted media-preview">⚠ Medien-Fehler: ${esc(it.media.error || '')}</p>`; }
+      else if (it.media.status === 'ready') {
+        mediaBlock = it.media.type === 'video' ? `<div class="media-preview"><video src="${esc(it.media.url)}" controls></video></div>` : `<div class="media-preview"><img src="${esc(it.media.url)}"/></div>`;
+        mediaBtn = `<button class="btn mini ghost" onclick="genMedia('${it.id}')">🔄 Neu generieren</button>`;
+      }
+    }
+    return `<div class="card post-card status-${it.status}">
+      <div class="post-head">
+        <span class="pbadge">${platIcon[it.platform] || ''} ${it.platform}</span>
+        <span class="pbadge">${themeLabel[it.theme] || it.theme}</span>
+        <span class="pbadge">${it.type}</span>
+        <span class="pstatus ${it.status}">${statusLabel[it.status] || it.status}</span>
+      </div>
+      <h4>${esc(c.title || '—')}</h4>
+      <p class="hook">„${esc(c.hook || '')}"</p>
+      <pre class="caption">${esc(c.caption || '')}</pre>
+      <p class="tags">${esc(tags)}</p>
+      ${mediaBlock}
+      <details><summary>Bild-Prompt &amp; Video-Skript anzeigen</summary>
+        <p class="muted" style="margin-top:8px;"><strong>Bild-Prompt:</strong> ${esc(c.imagePrompt || '—')}</p>
+        ${script ? `<table class="script"><thead><tr><th>#</th><th>On-Screen</th><th>Voiceover</th><th>Visual</th></tr></thead><tbody>${script}</tbody></table>` : ''}
+        <p class="muted" style="margin-top:8px;"><strong>CTA:</strong> ${esc(c.cta || '—')}</p>
+      </details>
+      <div class="post-actions">
+        ${it.status !== 'approved' ? `<button class="btn mini" onclick="setStatus('${it.id}','approved')">✓ Freigeben</button>` : ''}
+        ${it.status !== 'rejected' ? `<button class="btn mini ghost" onclick="setStatus('${it.id}','rejected')">Verwerfen</button>` : ''}
+        <input type="datetime-local" onchange="schedule('${it.id}', this.value)" value="${it.scheduledAt ? toLocalInput(it.scheduledAt) : ''}"/>
+        ${mediaBtn}
+        <button class="btn mini ghost" onclick="delPost('${it.id}')">Löschen</button>
+        ${sched ? `<span class="muted">📅 ${sched}</span>` : ''}
+        ${it.publishNote ? `<span class="muted">⏳ ${esc(it.publishNote)}</span>` : ''}
+      </div>
+    </div>`;
+  }
+
+  window.setStatus = async (id, status) => { await fetch('/api/admin/content/' + id, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status }) }); loadContent(); };
+  window.schedule = async (id, val) => { const ts = val ? new Date(val).getTime() : null; await fetch('/api/admin/content/' + id, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ scheduledAt: ts }) }); loadContent(); };
+  window.delPost = async (id) => { if (!confirm('Diesen Inhalt löschen?')) return; await fetch('/api/admin/content/' + id, { method: 'DELETE' }); loadContent(); };
+
+  window.genMedia = async (id) => { await fetch('/api/admin/content/' + id + '/media', { method: 'POST' }); await loadContent(); pollMedia(); };
+  let pollTimer = null;
+  function pollMedia() {
+    clearTimeout(pollTimer); let tries = 0;
+    const tick = async () => { tries++; await loadContent(); const processing = allContent.some((i) => i.media && i.media.status === 'processing'); if (processing && tries < 40) pollTimer = setTimeout(tick, 6000); };
+    pollTimer = setTimeout(tick, 6000);
+  }
+
+  function renderCalendar() {
+    if (!$('calHead')) return;
+    $('calHead').innerHTML = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'].map((h) => `<div class="cal-head">${h}</div>`).join('');
+    const now = new Date(); now.setHours(0, 0, 0, 0);
+    const dow = (now.getDay() + 6) % 7;
+    const start = new Date(now.getTime() - dow * 86400000);
+    const byDay = {};
+    allContent.filter((i) => i.scheduledAt).forEach((i) => { const d = new Date(i.scheduledAt); d.setHours(0, 0, 0, 0); (byDay[d.getTime()] = byDay[d.getTime()] || []).push(i); });
+    let cells = '';
+    for (let n = 0; n < 28; n++) {
+      const d = new Date(start.getTime() + n * 86400000);
+      const isToday = d.getTime() === now.getTime();
+      const posts = (byDay[d.getTime()] || []).sort((a, b) => a.scheduledAt - b.scheduledAt);
+      const postHtml = posts.map((p) => { const time = new Date(p.scheduledAt).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' }); return `<div class="cal-post" style="background:${platColor[p.platform] || '#888'}" title="${esc((p.content && p.content.title) || '')}">${time} ${platIcon[p.platform] || ''}</div>`; }).join('');
+      cells += `<div class="cal-cell ${isToday ? 'today' : ''}"><div class="cal-date">${d.getDate()}.${d.getMonth() + 1}.</div>${postHtml}</div>`;
+    }
+    $('calGrid').innerHTML = cells;
+  }
+
+  $('autoplanBtn').addEventListener('click', async () => {
+    $('autoplanStatus').textContent = 'Verplane …';
+    const r = await fetch('/api/admin/content/autoplan', { method: 'POST' });
+    const d = await r.json().catch(() => ({}));
+    $('autoplanStatus').textContent = r.ok ? `✓ ${d.planned} Posts verplant` : '⚠ Fehler';
+    await loadContent();
+    setTimeout(() => { $('autoplanStatus').textContent = ''; }, 3500);
+  });
+
+  fetch('/api/admin/stats?range=30d').then((r) => { if (r.ok) showDash(); });
+</script>
+</body>
+</html>

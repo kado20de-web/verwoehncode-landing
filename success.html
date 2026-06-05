@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="stylesheet" href="design-tokens.css"/>
+  <title>Danke für deinen Kauf — wirflirten</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-serif); background: var(--color-surface-page); color: var(--color-text-secondary); line-height: var(--leading-relaxed); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+    .card { background: var(--color-surface-2); border: var(--border-thin); border-top: 3px solid var(--color-accent); border-radius: var(--radius-xl); max-width: 540px; width: 100%; padding: 44px 36px; text-align: center; }
+    .brand { font-weight: 900; font-size: 22px; color: var(--color-text-primary); margin-bottom: 24px; }
+    .brand span { color: var(--color-accent); }
+    .check { font-size: 56px; margin-bottom: 12px; }
+    h1 { font-size: 26px; color: var(--color-text-primary); margin-bottom: 14px; }
+    p { margin-bottom: 18px; color: var(--color-text-tertiary); font-size: 16px; }
+    .dl-btn { display: block; background: var(--gradient-primary); color: var(--color-text-inverse); font-weight: 900; font-size: 16px; padding: 16px 24px; border-radius: var(--radius-md); text-decoration: none; margin: 12px 0; box-shadow: var(--shadow-accent); transition: transform var(--duration-base) var(--ease-out); }
+    .dl-btn:hover { transform: translateY(-2px); }
+    .muted { font-size: 13px; color: var(--color-text-muted); }
+    .home { display: inline-block; margin-top: 24px; color: var(--color-accent); font-size: 14px; }
+    .error { color: var(--color-warning); }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="brand">wir<span>flirten</span></div>
+    <div class="check">💞</div>
+    <h1>Danke für deinen Kauf!</h1>
+    <div id="content"><p>Einen Moment — wir laden deine Downloads…</p></div>
+    <a href="/" class="home">← Zurück zur Startseite</a>
+  </div>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const sessionId = params.get('session_id');
+    const content = document.getElementById('content');
+    if (!sessionId) { content.innerHTML = '<p class="error">Keine Bestellung gefunden.</p>'; }
+    else {
+      fetch('/api/order?session_id=' + encodeURIComponent(sessionId))
+        .then(r => r.json().then(data => ({ ok: r.ok, data })))
+        .then(({ ok, data }) => {
+          if (!ok) throw new Error(data.error || 'Fehler');
+          const buttons = data.links.map(l => `<a class="dl-btn" href="${l.url}">📖 ${l.title} herunterladen</a>`).join('');
+          content.innerHTML = `<p>Dein Kauf von <strong style="color:var(--color-text-primary)">${data.productName}</strong> war erfolgreich.</p>` + buttons + (data.email ? `<p class="muted">Wir haben die Download-Links zusätzlich an <strong>${data.email}</strong> geschickt.</p>` : '') + `<p class="muted">Speichere die Dateien am besten direkt auf deinem Gerät.</p>`;
+        })
+        .catch(err => { content.innerHTML = `<p class="error">${err.message}</p><p class="muted">Falls du bereits bezahlt hast, prüfe dein E-Mail-Postfach — die Links sind auch unterwegs zu dir. Bei Problemen schreib uns an <a href="mailto:wirflirten@vistaai.tech">wirflirten@vistaai.tech</a>.</p>`; });
+    }
+  </script>
+</body>
+</html>
