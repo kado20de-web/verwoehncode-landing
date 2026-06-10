@@ -430,11 +430,17 @@ async function fetchReviews() {
   const rows = parseCSV(await res.text());
   if (rows.length < 2) return [];
   const head = rows[0].map((h) => h.toLowerCase());
-  const find = (...keys) => head.findIndex((h) => keys.some((k) => h.includes(k)));
+  const used = new Set();
+  const find = (...keys) => {
+    const idx = head.findIndex((h, i) => !used.has(i) && keys.some((k) => h.includes(k)));
+    if (idx >= 0) used.add(idx);
+    return idx;
+  };
+  // Reihenfolge wichtig: spezifische Spalten zuerst beanspruchen
+  const iRate = find('stern', 'sterne');
+  const iCons = find('zeigen', 'website', 'veröffentlich', 'dürfen');
+  const iText = find('gefallen', 'am besten');
   const iProd = find('e-book', 'gelesen', 'buch');
-  const iRate = find('stern', 'bewert');
-  const iText = find('gefallen', 'best');
-  const iCons = find('zeigen', 'website', 'dürfen', 'veröffentlich');
   const iName = find('vorname', 'name', 'ort');
   const out = [];
   for (let r = 1; r < rows.length; r++) {
