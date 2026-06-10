@@ -12,6 +12,7 @@ const store = require('./lib/store');
 const admin = require('./lib/admin');
 const ai = require('./lib/ai');
 const media = require('./lib/media');
+const ebooks = require('./lib/ebooks');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -104,9 +105,20 @@ app.get('/download', (req, res) => {
   const { f, exp, sig } = req.query;
   if (!ALLOWED_FILES.has(f)) return res.status(404).send('Datei nicht gefunden.');
   if (!verify(f, exp, sig)) return res.status(403).send('Download-Link ungültig oder abgelaufen.');
+
+  // 1) Lokale Datei vorhanden (Entwicklung) → direkt ausliefern
   const filePath = path.join(__dirname, 'ebooks', f);
-  if (!fs.existsSync(filePath)) return res.status(404).send('Datei ist noch nicht hinterlegt. Bitte kontaktiere uns.');
-  res.download(filePath, f);
+  if (fs.existsSync(filePath)) return res.download(filePath, f);
+
+  // 2) Sonst (Produktion/Render) → signierten, ablaufenden Cloudinary-Link
+  if (ebooks.CONFIGURED) {
+    try {
+      return res.redirect(ebooks.signedDownloadUrl(f));
+    } catch (e) {
+      console.error('[download] Cloudinary-Link fehlgeschlagen:', e.message);
+    }
+  }
+  return res.status(404).send('Datei ist noch nicht hinterlegt. Bitte kontaktiere uns.');
 });
 
 /* 5) TRACKING */
