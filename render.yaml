@@ -9,7 +9,7 @@ services:
     envVars:
       - key: NODE_VERSION
         value: "20"
-      # Die folgenden Werte im Render-Dashboard setzen (nicht im Repo!):
+      # Alle folgenden Werte im Render-Dashboard eintragen (sync:false = nicht im Repo):
       - key: BASE_URL
         sync: false
       - key: STRIPE_SECRET_KEY
@@ -33,4 +33,10 @@ services:
       - key: CLOUDINARY_API_KEY
         sync: false
       - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: REVIEW_FORM_URL
+        sync: false
+      - key: REVIEW_SHEET_CSV_URL
+        sync: false
+      - key: REVIEW_CRON_TOKEN
         sync: false
