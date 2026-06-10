@@ -337,7 +337,7 @@
   <div class="section section-wide">
     <h2 class="text-center">Was Paare erzählen</h2>
     <div class="divider"></div>
-    <div class="review-grid">
+    <div class="review-grid" id="reviewGrid">
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
         <p class="review-text">Wir sind seit acht Jahren zusammen und dachten, wir kennen uns in- und auswendig. Die „101 romantischen Ideen" haben uns gezeigt, wie viel wir aufgehört hatten zu tun. Wir machen jetzt jede Woche eine Idee — es fühlt sich an wie am Anfang.</p>
@@ -536,6 +536,33 @@
     e.preventDefault();
     if (currentKey) startCheckout(currentKey, e.currentTarget);
   });
+
+  // ── Echte Bewertungen laden (ersetzt die Beispiele, sobald welche da sind) ──
+  (function () {
+    const grid = document.getElementById('reviewGrid');
+    if (!grid) return;
+    const esc = (s) => String(s).replace(/[&<>"]/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m]));
+    fetch('/api/reviews').then((r) => r.json()).then((d) => {
+      if (!d.reviews || !d.reviews.length) return; // keine echten → Beispiele behalten
+      grid.innerHTML = d.reviews.map((rv) => {
+        const rating = Math.max(1, Math.min(5, rv.rating || 5));
+        const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+        const initial = esc((rv.name || '★').trim().charAt(0).toUpperCase() || '★');
+        const meta = [rv.product, '✓ Verifizierter Kauf'].filter(Boolean).map(esc).join(' · ');
+        return `<div class="review-card">
+          <div class="review-stars">${stars}</div>
+          <p class="review-text">${esc(rv.text)}</p>
+          <div class="review-author">
+            <div class="review-avatar">${initial}</div>
+            <div>
+              <div class="review-name">${esc(rv.name || 'Zufriedenes Paar')}</div>
+              <div class="review-meta">${meta}</div>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+    }).catch(() => {});
+  })();
 </script>
 
 </body>

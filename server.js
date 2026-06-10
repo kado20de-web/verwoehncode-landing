@@ -403,6 +403,70 @@ app.get('/api/cron/review-emails', async (req, res) => {
 // Interne Sicherung: alle 6 Stunden (läuft, solange der Service wach ist)
 setInterval(() => { runReviewEmails().then((r) => { if (r && r.sent) console.log('[reviews] gesendet:', r.sent); }).catch(() => {}); }, 6 * 3600 * 1000);
 
+/* 6c) BEWERTUNGEN ANZEIGEN — aus veröffentlichtem Google-Sheet-CSV */
+const REVIEW_SHEET_CSV_URL = process.env.REVIEW_SHEET_CSV_URL || '';
+let reviewCache = { data: [], ts: 0 };
+
+function parseCSV(text) {
+  const rows = []; let row = [], cur = '', inQ = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (inQ) {
+      if (c === '"') { if (text[i + 1] === '"') { cur += '"'; i++; } else inQ = false; }
+      else cur += c;
+    } else if (c === '"') inQ = true;
+    else if (c === ',') { row.push(cur); cur = ''; }
+    else if (c === '\n') { row.push(cur); rows.push(row); row = []; cur = ''; }
+    else if (c !== '\r') cur += c;
+  }
+  if (cur !== '' || row.length) { row.push(cur); rows.push(row); }
+  return rows;
+}
+
+async function fetchReviews() {
+  if (!REVIEW_SHEET_CSV_URL) return [];
+  const res = await fetch(REVIEW_SHEET_CSV_URL);
+  if (!res.ok) throw new Error('CSV ' + res.status);
+  const rows = parseCSV(await res.text());
+  if (rows.length < 2) return [];
+  const head = rows[0].map((h) => h.toLowerCase());
+  const find = (...keys) => head.findIndex((h) => keys.some((k) => h.includes(k)));
+  const iProd = find('e-book', 'gelesen', 'buch');
+  const iRate = find('stern', 'bewert');
+  const iText = find('gefallen', 'best');
+  const iCons = find('zeigen', 'website', 'dürfen', 'veröffentlich');
+  const iName = find('vorname', 'name', 'ort');
+  const out = [];
+  for (let r = 1; r < rows.length; r++) {
+    const row = rows[r];
+    const consent = (iCons >= 0 ? row[iCons] : '').trim().toLowerCase();
+    if (!consent.startsWith('ja')) continue;
+    const text = (iText >= 0 ? row[iText] : '').trim();
+    if (!text) continue;
+    const rating = parseInt((iRate >= 0 ? row[iRate] : '5'), 10) || 5;
+    if (rating < 4) continue;
+    out.push({
+      name: (iName >= 0 ? row[iName] : '').trim() || 'Zufriedenes Paar',
+      product: (iProd >= 0 ? row[iProd] : '').trim(),
+      rating,
+      text,
+    });
+  }
+  return out.reverse();
+}
+
+app.get('/api/reviews', async (req, res) => {
+  try {
+    if (Date.now() - reviewCache.ts > 600000) {
+      reviewCache = { data: await fetchReviews(), ts: Date.now() };
+    }
+    res.json({ reviews: reviewCache.data.slice(0, 12) });
+  } catch (e) {
+    console.error('[reviews-display]', e.message);
+    res.json({ reviews: [] });
+  }
+});
+
 /* 7) SCHEDULER (Cronjob) */
 setInterval(() => {
   try {
