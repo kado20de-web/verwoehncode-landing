@@ -7,7 +7,7 @@ const Stripe = require('stripe');
 
 const { products, fileTitles } = require('./lib/products');
 const { createLink, verify } = require('./lib/tokens');
-const { sendDownloadEmail } = require('./lib/email');
+const { sendDownloadEmail, sendReviewEmail } = require('./lib/email');
 const store = require('./lib/store');
 const admin = require('./lib/admin');
 const ai = require('./lib/ai');
@@ -357,6 +357,51 @@ app.post('/api/admin/content/:id/media', requireAdmin, (req, res) => {
     }
   })();
 });
+
+/* 6b) BEWERTUNGS-MAILS — 14 Tage nach Kauf (Quelle: Stripe) */
+const REVIEW_FORM_URL = process.env.REVIEW_FORM_URL || '';
+const REVIEW_CRON_TOKEN = process.env.REVIEW_CRON_TOKEN || '';
+const REVIEW_SENT_FILE = path.join(__dirname, 'data', 'review-sent.json');
+function readReviewSent() { try { return new Set(JSON.parse(fs.readFileSync(REVIEW_SENT_FILE, 'utf8'))); } catch { return new Set(); } }
+function writeReviewSent(set) { fs.mkdirSync(path.dirname(REVIEW_SENT_FILE), { recursive: true }); fs.writeFileSync(REVIEW_SENT_FILE, JSON.stringify([...set])); }
+
+async function runReviewEmails() {
+  if (!stripe) return { skipped: 'stripe' };
+  if (!REVIEW_FORM_URL) return { skipped: 'REVIEW_FORM_URL' };
+  const now = Math.floor(Date.now() / 1000);
+  // Fenster: Käufe, die 14–21 Tage zurückliegen (Slack, falls ein Lauf ausfällt)
+  const gte = now - 21 * 86400;
+  const lte = now - 14 * 86400;
+  const sessions = (await stripe.checkout.sessions.list({ created: { gte, lte }, limit: 100 }).autoPagingToArray({ limit: 1000 }))
+    .filter((s) => s.payment_status === 'paid');
+  const sent = readReviewSent();
+  let count = 0;
+  for (const s of sessions) {
+    if (sent.has(s.id)) continue;
+    const email = s.customer_details?.email || s.customer_email;
+    if (!email) continue;
+    const product = products[s.metadata?.product];
+    try {
+      await sendReviewEmail({ to: email, productName: product?.name || 'dein E-Book', formUrl: REVIEW_FORM_URL });
+      sent.add(s.id);
+      count++;
+    } catch (e) {
+      console.error('[reviews] Mail fehlgeschlagen:', e.message);
+    }
+  }
+  if (count) writeReviewSent(sent);
+  return { scanned: sessions.length, sent: count };
+}
+
+// Von außen anstoßbar (z. B. täglicher Cron via cron-job.org / GitHub Actions)
+app.get('/api/cron/review-emails', async (req, res) => {
+  if (!REVIEW_CRON_TOKEN || req.query.token !== REVIEW_CRON_TOKEN) return res.status(403).json({ error: 'Forbidden' });
+  try { res.json(await runReviewEmails()); }
+  catch (e) { console.error('[reviews]', e.message); res.status(500).json({ error: e.message }); }
+});
+
+// Interne Sicherung: alle 6 Stunden (läuft, solange der Service wach ist)
+setInterval(() => { runReviewEmails().then((r) => { if (r && r.sent) console.log('[reviews] gesendet:', r.sent); }).catch(() => {}); }, 6 * 3600 * 1000);
 
 /* 7) SCHEDULER (Cronjob) */
 setInterval(() => {
