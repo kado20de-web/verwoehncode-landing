@@ -64,7 +64,7 @@
 
   /* ── TYPOGRAPHY ── */
   --font-sans:             'Inter', system-ui, -apple-system, sans-serif;
-  --font-serif:            'Georgia', 'Merriweather', serif;
+  --font-serif:            'Iowan Old Style', 'Palatino Linotype', 'Palatino', 'Book Antiqua', Georgia, 'Times New Roman', serif;
   --font-mono:             'Fira Code', Monaco, monospace;
 
   --text-xs:               10px;

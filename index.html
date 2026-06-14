@@ -176,6 +176,32 @@
     .modal-buy .cta-btn { width: auto; }
 
     @media (max-width: 820px) { .product-grid { grid-template-columns: 1fr; } .review-grid { grid-template-columns: 1fr; } }
+
+    /* Editorial-Politur */
+    h1, h2 { letter-spacing: -0.01em; }
+    .lead { line-height: 1.6; }
+
+    /* Bild-Slots (Platzhalter — später durch echte Markenbilder ersetzen) */
+    .img-slot { width: 100%; border-radius: var(--radius-2xl); overflow: hidden; background: var(--gradient-card); box-shadow: var(--shadow-md); }
+    .img-slot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* Hero zweispaltig */
+    .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: center; max-width: var(--container-lg); margin: 0 auto; text-align: left; }
+    .hero-grid .hero-copy { text-align: left; }
+    .hero-grid h1 { margin: 0 0 22px; max-width: none; }
+    .hero-grid .subheadline { margin: 0 0 32px; max-width: 520px; }
+    .hero-img { aspect-ratio: 4/5; }
+    @media (max-width: 820px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 32px; text-align: center; }
+      .hero-grid .hero-copy { text-align: center; }
+      .hero-grid .subheadline { margin-left: auto; margin-right: auto; }
+      .hero-img { max-width: 380px; margin: 0 auto; order: -1; }
+    }
+
+    /* Über uns */
+    .about-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 44px; align-items: center; }
+    .about-portrait { aspect-ratio: 4/5; }
+    @media (max-width: 760px) { .about-grid { grid-template-columns: 1fr; gap: 28px; } .about-portrait { max-width: 340px; margin: 0 auto; } }
   </style>
 </head>
 <body>
@@ -194,11 +220,17 @@
 
 <!-- 1 — HERO -->
 <section class="hero">
-  <p class="eyebrow">Für Paare, die mehr wollen als Alltag</p>
-  <h1>Irgendwann redet ihr nur noch über den Einkauf — <span>und kaum noch über euch.</span></h1>
-  <p class="subheadline">Ihr liebt euch. Trotzdem schleicht sich etwas ein: Routine. Abstand. Das Gefühl, sich verpasst zu haben, obwohl ihr im selben Bett liegt.</p>
-  <a href="#preis" class="hero-cta-btn">Wie ihr da rauskommt →</a>
-  <p class="below-btn">Sofort-Download · Kein Abo · Ehrliche, praxisnahe Ratgeber</p>
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">Für Paare, die mehr wollen als Alltag</p>
+      <h1>Irgendwann redet ihr nur noch über den Einkauf — <span>und kaum noch über euch.</span></h1>
+      <p class="subheadline">Ihr liebt euch. Trotzdem schleicht sich etwas ein: Routine. Abstand. Das Gefühl, sich verpasst zu haben, obwohl ihr im selben Bett liegt.</p>
+      <a href="#preis" class="hero-cta-btn">Wie ihr da rauskommt →</a>
+      <p class="below-btn">Sofort-Download · Kein Abo · Ehrliche, praxisnahe Ratgeber</p>
+    </div>
+    <!-- Bild-Platzhalter: hier später ein ruhiges, echtes Nähe-Foto (Paar) einsetzen -->
+    <div class="img-slot hero-img"><img src="/assets/img/hero.svg" alt="Ein Paar in einem nahen, ruhigen Moment" width="800" height="1000" loading="eager"/></div>
+  </div>
 </section>
 
 <!-- 2 — Das Gefühl spürbar machen -->
@@ -462,6 +494,23 @@
       <li>Ihr fühlt euch wieder als Team, nicht als Mitbewohner</li>
     </ul>
     <p style="margin-top:24px;">Und vielleicht am wichtigsten: <strong>Ihr seht euch wieder — wirklich.</strong></p>
+  </div>
+</div>
+
+<!-- ÜBER UNS -->
+<div class="section-dark" id="ueber-uns">
+  <div class="section section-wide">
+    <div class="about-grid">
+      <!-- Bild-Platzhalter: hier später ein warmes, echtes Porträt (Gründer/Team) einsetzen -->
+      <div class="img-slot about-portrait"><img src="/assets/img/about.svg" alt="Das Team hinter wirflirten" width="600" height="750" loading="lazy"/></div>
+      <div>
+        <span class="eyebrow-label" style="text-align:left;">Wer dahinter steht</span>
+        <h2>Menschen, die an <span>Beziehungen glauben</span></h2>
+        <p>wirflirten ist aus einer einfachen Überzeugung entstanden: Gute Beziehungen sind kein Glücksfall, sondern das Ergebnis von Aufmerksamkeit, Mut und den richtigen Impulsen zur richtigen Zeit.</p>
+        <p>Deshalb entwickeln wir Ratgeber, die nicht belehren, sondern begleiten — ehrlich, praxisnah und ohne erhobenen Zeigefinger. Kein leeres Versprechen, keine Tricks. Nur konkrete Ideen, die ihr heute Abend ausprobieren könnt.</p>
+        <p style="margin-bottom:0;"><strong>Unser Ziel:</strong> dass aus Verliebtheit Tiefe wird — und die Leichtigkeit nie verloren geht.</p>
+      </div>
+    </div>
   </div>
 </div>
 
