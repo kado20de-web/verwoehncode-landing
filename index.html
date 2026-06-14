@@ -27,7 +27,7 @@
     body { font-family: var(--font-serif); background: var(--color-surface-page); color: var(--color-text-secondary); line-height: var(--leading-relaxed); font-size: var(--text-md); }
     a { color: var(--color-accent); text-decoration: none; }
 
-    .nav { position: sticky; top: 0; z-index: var(--z-sticky); background: rgba(13,13,13,0.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--color-surface-3); display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; }
+    .nav { position: sticky; top: 0; z-index: var(--z-sticky); background: rgba(251,247,241,0.88); backdrop-filter: blur(10px); border-bottom: 1px solid var(--color-surface-3); display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; }
     .nav .brand { font-weight: 900; font-size: 20px; color: var(--color-text-primary); letter-spacing: 0.5px; }
     .nav .brand span { color: var(--color-accent); }
     .nav-links { display: flex; gap: 26px; font-size: 15px; }
@@ -36,7 +36,7 @@
     .nav-toggle { display: none; background: none; border: none; color: var(--color-text-primary); font-size: 26px; line-height: 1; cursor: pointer; padding: 4px 8px; }
     @media (max-width: 640px) {
       .nav-toggle { display: block; }
-      .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0; background: rgba(13,13,13,0.98); backdrop-filter: blur(10px); border-bottom: 1px solid var(--color-surface-3); padding: 6px 0; }
+      .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0; background: rgba(251,247,241,0.98); backdrop-filter: blur(10px); border-bottom: 1px solid var(--color-surface-3); padding: 6px 0; }
       .nav-links.open { display: flex; }
       .nav-links a { padding: 14px 24px; }
     }
@@ -48,7 +48,7 @@
     .hero h1 { font-size: clamp(30px, 5.5vw, 60px); font-weight: 900; line-height: var(--leading-tight); color: var(--color-text-primary); max-width: 940px; margin: 0 auto 24px; }
     .hero h1 span { color: var(--color-accent); }
     .hero .subheadline { font-size: clamp(16px, 2.5vw, 22px); color: var(--color-text-secondary); max-width: 700px; margin: 0 auto 40px; font-style: italic; }
-    .hero-cta-btn { display: inline-block; background: var(--gradient-primary); color: var(--color-text-inverse); font-weight: 900; font-size: 19px; padding: 19px 46px; border-radius: var(--radius-md); cursor: pointer; border: none; text-transform: uppercase; letter-spacing: 1px; transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out); box-shadow: var(--shadow-accent); }
+    .hero-cta-btn { display: inline-block; background: var(--gradient-primary); color: var(--color-text-inverse); font-weight: 800; font-size: 18px; padding: 18px 44px; border-radius: var(--radius-md); cursor: pointer; border: none; letter-spacing: 0.2px; transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out); box-shadow: var(--shadow-accent); }
     .hero-cta-btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-accent-hover); }
     .hero .below-btn { font-size: 13px; color: var(--color-text-muted); margin-top: 14px; }
 
@@ -76,7 +76,7 @@
     .compare-col { background: var(--color-surface-2); border: var(--border-thin); border-radius: var(--radius-lg); padding: 24px 26px; }
     .compare-col h3 { font-size: 17px; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 1px; }
     .compare-col.pos { border-color: var(--color-accent-border); }
-    .compare-col.pos h3 { color: var(--color-success-light); }
+    .compare-col.pos h3 { color: #2e7d32; }
     .compare-col.neg h3 { color: var(--color-text-muted); }
     .compare-col ul { list-style: none; }
     .compare-col li { padding: 8px 0 8px 26px; position: relative; font-size: 15px; color: var(--color-text-tertiary); }
@@ -99,12 +99,12 @@
     .cover-zoom { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 0 12px; background: linear-gradient(transparent, rgba(0,0,0,0.78)); color: #fff; font-size: 13px; font-weight: 700; letter-spacing: .5px; opacity: 0; transition: opacity .3s; }
     .cover-wrap:hover .cover-zoom, .cover-wrap:focus-visible .cover-zoom { opacity: 1; }
 
-    .benefit { font-size: 14px; color: var(--color-success-light); background: var(--color-success-bg); border: 1px solid rgba(76,175,80,0.2); border-radius: var(--radius-sm); padding: 9px 12px; margin-bottom: 18px; text-align: left; }
+    .benefit { font-size: 14px; color: #2e7d32; background: var(--color-success-bg); border: 1px solid rgba(76,175,80,0.25); border-radius: var(--radius-sm); padding: 9px 12px; margin-bottom: 18px; text-align: left; }
     .card-actions { display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
-    .btn-ghost { background: transparent; color: var(--color-accent); border: 1px solid var(--color-accent-border); border-radius: var(--radius-md); padding: 12px; font-weight: 700; font-size: 14px; cursor: pointer; text-transform: uppercase; letter-spacing: .5px; transition: background .2s var(--ease-out); }
+    .btn-ghost { background: transparent; color: var(--color-accent); border: 1px solid var(--color-accent-border); border-radius: var(--radius-md); padding: 12px; font-weight: 600; font-size: 14px; cursor: pointer; letter-spacing: 0.2px; transition: background .2s var(--ease-out); }
     .btn-ghost:hover { background: var(--color-accent-subtle); }
 
-    .cta-btn { display: inline-block; background: var(--gradient-primary); color: var(--color-text-inverse); font-weight: 900; font-size: 16px; padding: 15px 28px; border-radius: var(--radius-md); cursor: pointer; border: none; text-transform: uppercase; letter-spacing: 1px; width: 100%; text-align: center; transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out); box-shadow: var(--shadow-accent); }
+    .cta-btn { display: inline-block; background: var(--gradient-primary); color: var(--color-text-inverse); font-weight: 800; font-size: 16px; padding: 15px 28px; border-radius: var(--radius-md); cursor: pointer; border: none; letter-spacing: 0.2px; width: 100%; text-align: center; transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out); box-shadow: var(--shadow-accent); }
     .cta-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-accent-hover); }
 
     .bundle-card { background: var(--gradient-dark); border: var(--border-accent); border-radius: var(--radius-2xl); padding: 44px 40px; margin-top: 40px; text-align: center; position: relative; box-shadow: var(--shadow-accent-card); }
@@ -114,7 +114,7 @@
     .bundle-price .old { font-size: 22px; color: var(--color-text-disabled); text-decoration: line-through; }
     .bundle-price .new { font-size: 52px; font-weight: 900; color: var(--color-text-primary); line-height: 1; }
     .bundle-price .new sup { font-size: 24px; vertical-align: super; }
-    .bundle-saving { color: var(--color-success); font-size: 15px; margin-bottom: 24px; }
+    .bundle-saving { color: var(--color-text-tertiary); font-size: 15px; margin-bottom: 24px; }
     .bundle-card .cta-btn { max-width: 360px; margin: 0 auto; font-size: 18px; padding: 18px 36px; }
 
     .value-box { background: var(--color-surface-1); border: var(--border-thin); border-radius: var(--radius-lg); padding: 28px; margin: 30px auto 0; max-width: 560px; }
@@ -137,14 +137,14 @@
     .option.featured h3 { color: var(--color-accent); }
     .option.featured li::before { content: '✓'; color: var(--color-success); font-weight: 900; }
 
-    .highlight-box { background: var(--color-accent-subtle); border-left: 4px solid var(--color-accent); padding: 24px 28px; border-radius: var(--radius-sm); margin: 30px auto; max-width: 680px; font-size: 19px; color: var(--color-primary-200); font-style: italic; }
+    .highlight-box { background: var(--color-accent-subtle); border-left: 4px solid var(--color-accent); padding: 24px 28px; border-radius: var(--radius-sm); margin: 30px auto; max-width: 680px; font-size: 19px; color: var(--color-text-primary); font-style: italic; }
 
     .review-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; margin-top: 44px; }
     .review-card { background: var(--color-surface-2); border: 1px solid var(--color-surface-3); border-radius: var(--radius-lg); padding: 28px; position: relative; }
     .review-stars { color: var(--color-accent); font-size: var(--text-md); margin-bottom: 12px; }
     .review-text { font-size: 16px; color: var(--color-text-secondary); line-height: var(--leading-relaxed); font-style: italic; margin-bottom: 16px; }
     .review-author { display: flex; align-items: center; gap: 12px; }
-    .review-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--gradient-primary); display: flex; align-items: center; justify-content: center; font-weight: 900; color: var(--color-text-inverse); font-size: var(--text-md); flex-shrink: 0; }
+    .review-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--color-accent-subtle); border: 1px solid var(--color-accent-border); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--color-accent); font-size: var(--text-md); flex-shrink: 0; }
     .review-name { font-weight: bold; color: var(--color-text-primary); font-size: 15px; }
     .review-meta { font-size: 13px; color: var(--color-text-disabled); }
     .verified { font-size: 12px; color: var(--color-success); }
@@ -474,22 +474,22 @@
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
         <p class="review-text">Wir sind seit acht Jahren zusammen und dachten, wir kennen uns in- und auswendig. Die „101 romantischen Ideen" haben uns gezeigt, wie viel wir aufgehört hatten zu tun. Es fühlt sich an wie am Anfang.</p>
-        <div class="review-author"><div class="review-avatar">L</div><div><div class="review-name">Lena &amp; Tobias</div><div class="review-meta">Köln <span class="verified">✓ Verifizierter Kauf</span></div></div></div>
+        <div class="review-author"><div class="review-avatar">L</div><div><div class="review-name">Lena &amp; Tobias</div><div class="review-meta">Köln</div></div></div>
       </div>
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
         <p class="review-text">Das Massage-Buch war als kleines Geschenk gedacht und ist zu unserem festen Sonntagsritual geworden. So entspannt und nah waren wir uns lange nicht.</p>
-        <div class="review-author"><div class="review-avatar">S</div><div><div class="review-name">Sandra K.</div><div class="review-meta">Stuttgart <span class="verified">✓ Verifizierter Kauf</span></div></div></div>
+        <div class="review-author"><div class="review-avatar">S</div><div><div class="review-name">Sandra K.</div><div class="review-meta">Stuttgart</div></div></div>
       </div>
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
         <p class="review-text">„So werdet ihr ein Musterpaar" hat uns nicht nur Tipps gegeben, sondern endlich die richtigen Worte füreinander. Das Kapitel über Streiten ohne zu verletzen sollte jedes Paar lesen.</p>
-        <div class="review-author"><div class="review-avatar">M</div><div><div class="review-name">Miriam &amp; Jonas</div><div class="review-meta">Hamburg <span class="verified">✓ Verifizierter Kauf</span></div></div></div>
+        <div class="review-author"><div class="review-avatar">M</div><div><div class="review-name">Miriam &amp; Jonas</div><div class="review-meta">Hamburg</div></div></div>
       </div>
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
         <p class="review-text">Endlich Ratgeber, die nicht belehrend sind. Praktisch, ehrlich, sofort umsetzbar. Das Paar-Paket war jeden Cent wert — und ein super Geschenk zum Jahrestag.</p>
-        <div class="review-author"><div class="review-avatar">D</div><div><div class="review-name">David R.</div><div class="review-meta">Wien <span class="verified">✓ Verifizierter Kauf</span></div></div></div>
+        <div class="review-author"><div class="review-avatar">D</div><div><div class="review-name">David R.</div><div class="review-meta">Wien</div></div></div>
       </div>
     </div>
   </div>
@@ -510,14 +510,14 @@
     </div>
 
     <div class="bundle-card">
-      <div class="tag">★ Bestes Angebot — Paar-Paket</div>
+      <div class="tag">Das komplette Paar-Paket</div>
       <h3>Alle 3 Ratgeber in einem Paket</h3>
       <p style="color:var(--color-text-tertiary); max-width:520px; margin:0 auto 8px;">Alles, was ihr für mehr Romantik, Nähe und Leidenschaft braucht — in einem Download.</p>
       <div class="bundle-price">
         <span class="old">38,97&nbsp;€</span>
         <span class="new"><sup>€</sup>24<span style="font-size:26px;">,99</span></span>
       </div>
-      <p class="bundle-saving">✦ Du sparst 13,98&nbsp;€ gegenüber dem Einzelkauf</p>
+      <p class="bundle-saving">Alle drei Ratgeber zusammen — günstiger als einzeln.</p>
       <a href="#" class="cta-btn" data-checkout="bundle">Paar-Paket sichern →</a>
       <p style="color:var(--color-text-disabled); font-size:13px; margin-top:16px; margin-bottom:0;">🔒 Sofort-Download · Einmalzahlung · Kein Abo</p>
     </div>

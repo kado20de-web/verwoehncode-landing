@@ -9,33 +9,33 @@
   --meta-version: 1.0.0;
 
   /* ── PRIMARY COLOR SCALE ── */
-  --color-primary-50:      #fdf3e3;
-  --color-primary-100:     #fae5c1;
-  --color-primary-200:     #f6d49a;
-  --color-primary-300:     #f2c272;
-  --color-primary-400:     #edb358;
-  --color-primary-500:     #e8a045;   /* Brand: wirflirten.de Gold */
-  --color-primary-600:     #c97d20;
-  --color-primary-700:     #a05e10;
-  --color-primary-800:     #6b3e08;
-  --color-primary-900:     #3a2004;
+  --color-primary-50:      #fbf1ef;
+  --color-primary-100:     #f6ddd9;
+  --color-primary-200:     #ecc0ba;
+  --color-primary-300:     #df9c93;
+  --color-primary-400:     #cd7268;
+  --color-primary-500:     #b5544e;   /* Brand: wirflirten Terrakotta-Rosé */
+  --color-primary-600:     #9b4540;
+  --color-primary-700:     #7e3833;
+  --color-primary-800:     #5a2926;
+  --color-primary-900:     #3a1b19;
 
   /* ── DARK SURFACE SCALE ── */
-  --color-surface-page:    #0d0d0d;   /* Seitenhintergrund */
-  --color-surface-dark:    #0a0a0a;   /* Noch dunkler */
-  --color-surface-1:       #111111;   /* Sections */
-  --color-surface-2:       #1a1a1a;   /* Cards */
-  --color-surface-3:       #222222;   /* Hover States */
-  --color-surface-4:       #2a2a2a;   /* Borders */
-  --color-surface-overlay: rgba(0, 0, 0, 0.6);
+  --color-surface-page:    #fbf7f1;   /* Seitenhintergrund (warmes Creme) */
+  --color-surface-dark:    #f1e9dd;   /* Alternierende Sektionen */
+  --color-surface-1:       #f6efe5;   /* Sections */
+  --color-surface-2:       #ffffff;   /* Cards */
+  --color-surface-3:       #ece2d5;   /* Hover / feine Linien */
+  --color-surface-4:       #ddd0bf;   /* Borders */
+  --color-surface-overlay: rgba(40, 30, 26, 0.45);
 
   /* ── TEXT SCALE ── */
-  --color-text-primary:    #ffffff;
-  --color-text-secondary:  #cccccc;
-  --color-text-tertiary:   #aaaaaa;
-  --color-text-muted:      #888888;
-  --color-text-disabled:   #555555;
-  --color-text-inverse:    #000000;
+  --color-text-primary:    #2a2320;
+  --color-text-secondary:  #4a423b;
+  --color-text-tertiary:   #6b6058;
+  --color-text-muted:      #938778;
+  --color-text-disabled:   #b6aa9a;
+  --color-text-inverse:    #ffffff;
 
   /* ── SEMANTIC COLORS ── */
   --color-success:         #4caf50;
@@ -49,18 +49,18 @@
   --color-info:            #3b82f6;
 
   /* ── ACCENT / HIGHLIGHT ── */
-  --color-accent:          #e8a045;   /* Alias für Primary */
-  --color-accent-hover:    #c97d20;
-  --color-accent-glow:     rgba(232, 160, 69, 0.4);
-  --color-accent-glow-strong: rgba(232, 160, 69, 0.6);
-  --color-accent-subtle:   rgba(232, 160, 69, 0.1);
-  --color-accent-border:   rgba(232, 160, 69, 0.3);
+  --color-accent:          #b5544e;   /* Alias für Primary (Terrakotta-Rosé) */
+  --color-accent-hover:    #9b4540;
+  --color-accent-glow:     rgba(181, 84, 78, 0.18);
+  --color-accent-glow-strong: rgba(181, 84, 78, 0.26);
+  --color-accent-subtle:   rgba(181, 84, 78, 0.08);
+  --color-accent-border:   rgba(181, 84, 78, 0.28);
 
   /* ── GRADIENT ── */
-  --gradient-primary:      linear-gradient(135deg, #e8a045, #c97d20);
-  --gradient-hero:         linear-gradient(135deg, #1a0a00 0%, #2d1200 50%, #1a0a00 100%);
-  --gradient-dark:         linear-gradient(135deg, #1a0a00, #2d1200);
-  --gradient-card:         linear-gradient(135deg, #1a1a1a, #222222);
+  --gradient-primary:      linear-gradient(135deg, #c0584f, #9b4540);
+  --gradient-hero:         linear-gradient(135deg, #fbf2ec 0%, #f6e6dc 50%, #fbf2ec 100%);
+  --gradient-dark:         linear-gradient(135deg, #fdf6ee, #f5e7da);
+  --gradient-card:         linear-gradient(135deg, #ffffff, #f6efe5);
 
   /* ── TYPOGRAPHY ── */
   --font-sans:             'Inter', system-ui, -apple-system, sans-serif;
@@ -148,13 +148,13 @@
   --border-accent-thin:    1px solid var(--color-accent-border);
 
   /* ── SHADOWS ── */
-  --shadow-sm:             0 1px 2px rgba(0,0,0,0.3);
-  --shadow-md:             0 4px 12px rgba(0,0,0,0.4);
-  --shadow-lg:             0 10px 30px rgba(0,0,0,0.5);
-  --shadow-accent:         0 8px 30px var(--color-accent-glow);
-  --shadow-accent-hover:   0 12px 40px var(--color-accent-glow-strong);
-  --shadow-accent-card:    0 0 40px rgba(232,160,69,0.2);
-  --shadow-inner:          inset 0 2px 4px rgba(0,0,0,0.3);
+  --shadow-sm:             0 1px 2px rgba(40,30,26,0.05);
+  --shadow-md:             0 6px 18px rgba(40,30,26,0.07);
+  --shadow-lg:             0 16px 40px rgba(40,30,26,0.10);
+  --shadow-accent:         0 8px 22px var(--color-accent-glow);
+  --shadow-accent-hover:   0 12px 28px var(--color-accent-glow-strong);
+  --shadow-accent-card:    0 12px 36px rgba(40,30,26,0.10);
+  --shadow-inner:          inset 0 2px 4px rgba(40,30,26,0.06);
 
   /* ── ANIMATION ── */
   --duration-fast:         150ms;
