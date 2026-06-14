@@ -79,7 +79,7 @@ app.post('/api/checkout', async (req, res) => {
     res.json({ url: session.url });
   } catch (e) {
     console.error('[checkout]', e.message);
-    res.status(500).json({ error: 'Checkout konnte nicht erstellt werden.' });
+    res.status(500).json({ error: 'Checkout konnte nicht erstellt werden.', detail: e.message });
   }
 });
 
